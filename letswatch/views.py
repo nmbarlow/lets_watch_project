@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from letswatch.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from letswatch.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from letswatch.models import UserProfile
+from django.contrib.auth.models import User
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 def index(request):
     context_dict = {'boldmessage': "Testing"}
@@ -61,3 +63,28 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+# @login_required
+# def profile(request):
+#
+#     if request.method == 'POST':
+#
+#         user_form = ProfileForm(data=request.POST)
+#         profile_form = UserProfileForm(data=request.POST)
+#
+#         if user_form.is_valid() and profile_form.is_valid():
+#             # Get the current logged in User
+#             user = User.objects.get(username=request.user.username)
+#             user_profile = UserProfile.objects.get(user=user)
+#
+#         else:
+#             user_form = ProfileForm()
+#             profile_form = UserProfileForm()
+#
+#       return render(request, 'letswatch/profile.html', {'user_form': user_form,'profile_form': profile_form})
+
+def search(request):
+    return HttpResponse("Search page for movies")
+
+def about(request):
+    return HttpResponse("About us page")
