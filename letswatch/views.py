@@ -40,6 +40,7 @@ def register(request):
 
     return render(request, 'letswatch/register.html', {'user_form':user_form, 'profile_form':profile_form, 'registered':registered})
 
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -58,6 +59,10 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'letswatch/login.html', {})
+
+@login_required
+def restricted(request):
+    return render(request, 'letswatch/restricted.html', {})
 
 @login_required
 def user_logout(request):
