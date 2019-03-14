@@ -125,24 +125,72 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-# im not sure if this is working yet!
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.user.create_user',
-    'lets_watch_project.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
+# # im not sure if this is working yet!
+# SOCIAL_AUTH_PIPELINE = (
+#     'social_core.pipeline.social_auth.social_details',
+#     'social_core.pipeline.social_auth.social_uid',
+#     'social_core.pipeline.social_auth.auth_allowed',
+#     'social_core.pipeline.social_auth.social_user',
+#     'social_core.pipeline.user.get_username',
+#     'social_core.pipeline.user.create_user',
+#     'lets_watch_project.pipeline.user.create_user',
+#     'social_core.pipeline.social_auth.associate_user',
+#     'social_core.pipeline.social_auth.load_extra_data',
+#     'social_core.pipeline.user.user_details',
+# )
+#
+# SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
+# SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
+#
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 
-SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
-SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.twitter.TwitterOAuth',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# google api key GOOGLE_KEY 'AIzaSyB9Fn6ws_C1eAjmx9Hmxd3RlcobnSHkyr4'
+
+# facebook - not exactly sure what file it will go in to, but its JavaScript
+# <script>
+#   window.fbAsyncInit = function() {
+#     FB.init({
+#       appId      : '{your-app-id}',
+#       cookie     : true,
+#       xfbml      : true,
+#       version    : '{api-version}'
+#     });
+#
+#     FB.AppEvents.logPageView();
+#
+#   };
+#
+#   (function(d, s, id){
+#      var js, fjs = d.getElementsByTagName(s)[0];
+#      if (d.getElementById(id)) {return;}
+#      js = d.createElement(s); js.id = id;
+#      js.src = "https://connect.facebook.net/en_US/sdk.js";
+#      fjs.parentNode.insertBefore(js, fjs);
+#    }(document, 'script', 'facebook-jssdk'));
+# </script>
+
+  # check log in status
+    # FB.getLoginStatus(function(response) {
+    #     statusChangeCallback(response);
+    # });
+
+    # {
+    #     status: 'connected',
+    #     authResponse: {
+    #         accessToken: '...',
+    #         expiresIn:'...',
+    #         signedRequest:'...',
+    #         userID:'...'
+    #     }
+    # }
+
+    # button
+    # function checkLoginState() {
+    #   FB.getLoginStatus(function(response) {
+    #     statusChangeCallback(response);
+    #   });
+    # }
