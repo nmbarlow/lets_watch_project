@@ -15,15 +15,21 @@ def index(request):
     return response
 
 def register(request):
+
     registered = False
+
     if request.method == 'POST':
+
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
+
             user = user_form.save()
+
             user.set_password(user.password)
-            user.save
+            user.save()
+
             profile = profile_form.save(commit=False)
             profile.user = user
 
@@ -31,15 +37,17 @@ def register(request):
                 profile.picture = request.FILES['picture']
 
             profile.save()
-            registered=True
+
+            registered = True
         else:
+
             print(user_form.errors, profile_form.errors)
     else:
+
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(request, 'letswatch/register.html', {'user_form':user_form, 'profile_form':profile_form, 'registered':registered})
-
+    return render(request, 'letswatch/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def user_login(request):
     if request.method == 'POST':
@@ -61,32 +69,71 @@ def user_login(request):
         return render(request, 'letswatch/login.html', {})
 
 @login_required
-def restricted(request):
-    return render(request, 'letswatch/restricted.html', {})
-
-@login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-# @login_required
-# def profile(request):
-#
-#     if request.method == 'POST':
-#
-#         user_form = ProfileForm(data=request.POST)
-#         profile_form = UserProfileForm(data=request.POST)
-#
-#         if user_form.is_valid() and profile_form.is_valid():
-#             # Get the current logged in User
-#             user = User.objects.get(username=request.user.username)
-#             user_profile = UserProfile.objects.get(user=user)
-#
-#         else:
-#             user_form = ProfileForm()
-#             profile_form = UserProfileForm()
-#
-#       return render(request, 'letswatch/profile.html', {'user_form': user_form,'profile_form': profile_form})
+@ login_required
+def deactivate_profile(request):
+
+    user = request.user
+    user.is_active= False
+    user.save()
+
+    context_dict = 'Profile successfully deactivated'
+
+    return render(request, 'letswatch/deactivate_profile.html', context=context_dict)
+
+def profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('home')
+
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+
+    form = UserProfileForm({'picture': userprofile.picture})
+
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('user_profile', user.username)
+        else:
+            print(form.errors)
+
+    return render(request, 'letswatch/userprofile.html',
+                  {'userprofile': userprofile, 'user': user, 'form': form})
+
+
+@login_required
+def movie_review(request):
+
+    context_dict = {}
+    rate = Rate.objects.filter()
+
+    context_dict['rate'] = rate
+
+    return render(request, 'letswatch/review_movie.html', context_dict)
+
+@login_required
+def review_movie(request):
+
+    if request.method == 'GET':
+
+        movie_id = request.GET['movieid']
+        likes = 0
+
+        if movie_id:
+            movie = Movie.objects.get(id=int(movie_id))
+
+            if movie:
+                likes = movie.likes + 1
+                movive.likes = likes
+                movie.save()
+
+            return HttpResponse(likes)
 
 def search(request):
     return HttpResponse("Search page for movies")
