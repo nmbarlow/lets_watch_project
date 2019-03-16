@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^letswatch/', include('letswatch.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^search/', include('search.urls', namespace='search')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
