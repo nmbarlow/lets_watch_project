@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from rango.models import Category, Page
 from rango.models import UserProfile
+from rango.models import Post,Comment
 
 # Register your models here.
 
@@ -21,3 +22,6 @@ admin.site.register(Category,CategoryAdmin)
 
 admin.site.register(Page,PageAdmin)
 admin.site.register(UserProfile)
+
+admin.site.register(Post)
+admin.site.register(Comment)

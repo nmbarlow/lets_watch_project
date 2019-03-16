@@ -14,6 +14,7 @@ urlpatterns=[
 	url(r'^signup/$',views.user_signup,name='signup'),
 	url(r'^logout/$',views.user_logout,name='logout'),
 	url(r'^restricted/$',views.restricted,name='restricted'),
+	url(r'^posts/$',views.post_list, name='post_list'),
 	url(r'^$',views.index,name='index'),
 
 ]

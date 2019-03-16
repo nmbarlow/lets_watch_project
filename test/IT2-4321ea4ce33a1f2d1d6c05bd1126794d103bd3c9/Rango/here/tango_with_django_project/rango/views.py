@@ -218,3 +218,7 @@ def get_server_side_cookie(request,cookie,default_val=None):
 	return val
 
 
+def post_list(request):
+    return render(request, 'rango/post_list.html', {})
+
+
