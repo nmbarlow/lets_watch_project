@@ -1,0 +1,74 @@
+Creating test database for alias 'default'...
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+- Python - Official Python Tutorial
+- Python - How to Think like a Computer Scientist
+- Python - Learn Python in 10 Minutes
+- Django - Official Django Tutorial
+- Django - Django Rocks
+- Django - How to Tango with Django
+- Other Frameworks - Bottle
+- Other Frameworks - Flask
+Destroying test database for alias 'default'...
