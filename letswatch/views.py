@@ -8,15 +8,10 @@ from django.contrib.auth import logout
 from letswatch.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.db.models import Q
-
 
 def index(request):
-
     context_dict = {'boldmessage': "Testing"}
     response = render(request, 'letswatch/index.html', context=context_dict)
-
-# Return response back to the user
     return response
 
 def register(request):
