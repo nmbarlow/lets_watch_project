@@ -1,0 +1,32 @@
+{% extends 'letswatch/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add a movie
+{% endblock %}
+
+{% block body_block %}
+
+    <h1>Add a movie</h1>
+        {% if genre %}
+            <div>
+
+                <form id="movie_form" method="post" action="/rango/genre/{{genre.slug}}/add_movie/">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{hidden}}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{field.errors}}
+                        {{field.help_text}}
+                        {{field}}
+                    {% endfor %}
+                    <input type="submit" name="submit" value="Add movie" />
+                </form>
+
+            </div>
+        {% else %}
+            A genre by this name does not exist.
+        {% endif%}
+
+{% endblock %}

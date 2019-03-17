@@ -4,21 +4,38 @@ from django.contrib.auth.models import User
 from datetime import datetime, date, timezone, time
 from django.utils import timezone
 
-# Create your models here.
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    profile_picture = models.ImageField(upload_to='profile_images', blank=True)
+class Genre(models.Model):
+
+    max_length = 128
+    name = models.CharField(max_length=128, unique=True)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Genre, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Genres'
 
     def __str__(self):
-        return self.user.username
+        return self.name
 
 class Movie(models.Model):
 
-    title = models.CharField(max_length=50)
-    content = models.TextField()
+    genre = models.ForeignKey(Genre)
+    title = models.CharField(max_length=128)
+    url = models.URLField()
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
+
+class UserProfile(models.Model):
+	user = models.OneToOneField(User)
+	picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
+
+	def __str__(self):
+		return self.user.username
 
 class VideoPost(models.Model):
 
