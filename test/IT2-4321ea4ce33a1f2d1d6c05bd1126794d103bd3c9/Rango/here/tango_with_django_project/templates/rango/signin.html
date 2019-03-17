@@ -25,7 +25,7 @@
              <div class="header-title">
                 <h1 class="wv-heading--title">Please sign in</h1>
                   <h2 class="wv-heading--subtitle">
-               No account ? <a href="{% url 'signup' %}">Sign up here</a>             
+               No account ? <a href="{% url 'register' %}">Sign up here</a>             
             </h2>
              </div>
           </div>
@@ -33,13 +33,13 @@
              <div class="col-md-4 mx-auto">
             <div class="myform form ">
                  
-          <form id="user_form">
+          <form id="login_form" method="post" action="{% url 'login' %}">
            
              {% csrf_token %}
 
-            <input type="email" id="inputEmail" class="form-control my-input" placeholder="Email address" required autofocus>
+            <input type="text" id="inputEmail" class="form-control my-input" placeholder="Username" name="username" required autofocus>
             <p></p>
-            <input type="password" id="inputPassword" class="form-control my-input" placeholder="Password" required>
+            <input type="password" name="password" id="inputPassword" class="form-control my-input" placeholder="Password" required>
             <p></p>
 
               <div class="text-center ">
