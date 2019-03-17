@@ -8,10 +8,15 @@ from django.contrib.auth import logout
 from letswatch.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.db.models import Q
+
 
 def index(request):
+
     context_dict = {'boldmessage': "Testing"}
     response = render(request, 'letswatch/index.html', context=context_dict)
+
+# Return response back to the user
     return response
 
 def register(request):
@@ -135,8 +140,27 @@ def review_movie(request):
 
             return HttpResponse(likes)
 
-def search(request):
-    return HttpResponse("Search page for movies")
+# def search(request):
+#     if request.method == 'GET':
+#         query = request.GET.get('q')
+#
+#         submitbutton = request.GET.get('submit')
+#
+#         if query is not None:
+#             lookups = Q(title__icontains=query) | Q(content__icontains=query)
+#
+#             results = Post.objects.filter(lookups).distinct()
+#
+#             context = {'results': results,
+#                        'submitbutton': submitbutton}
+#
+#             return render(request, 'search/search.html', context)
+#
+#         else:
+#             return render(request, 'search/search.html')
+#
+#     else:
+#         return render(request, 'search/search.html')
 
 def about(request):
     return HttpResponse("About us page")

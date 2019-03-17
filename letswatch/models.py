@@ -12,6 +12,14 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Movie(models.Model):
+
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
+
 class VideoPost(models.Model):
 
     title = models.CharField(max_length=200)

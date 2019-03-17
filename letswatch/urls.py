@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from letswatch import views
+# from .views import (search)
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -11,6 +12,6 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     # url(r'^signup/$', views.signup, name='signup'),
     url(r'^profile/(?P<username>[\w\-]+)/$',views.profile, name='profile'),
-    url(r'^search/$',views.search, name='search'),
+    # url(r'^search/$',views.search, name='search'),
 
 ]
