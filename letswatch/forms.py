@@ -45,7 +45,29 @@ class MovieForm(forms.ModelForm):
         # fields = ('title', 'url', 'views')
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    email=forms.CharField(widget=forms.TextInput(attrs=
+        {'name':'email',
+        'class':'form-control my-input',
+        'id':'email',
+        'placeholder':'Email',
+        }),label=""
+    )
+    username=forms.CharField(widget=forms.TextInput(attrs=
+        {'name':'name',
+        'class':'form-control my-input',
+        'id':'name',
+        'placeholder':'Name',
+        }),label=""
+    )
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs=
+        {'name':'password',
+        'class':'form-control my-input',
+        'id':'password',
+        'placeholder':'Password',
+        'min':'0',
+
+        }),label="")
 
 #An inline class to provide additional information on the form.
     class Meta:
