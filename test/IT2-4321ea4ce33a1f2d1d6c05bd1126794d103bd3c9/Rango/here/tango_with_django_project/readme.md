@@ -1,0 +1,1 @@
+templates should be inside the parents directory

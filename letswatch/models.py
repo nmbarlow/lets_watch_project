@@ -6,32 +6,30 @@ from django.utils import timezone
 
 class Genre(models.Model):
 
-	max_length = 128
-	name = models.CharField(max_length=128, unique=True)
-	slug = models.SlugField(unique=True)
+    max_length = 128
+    name = models.CharField(max_length=128, unique=True)
+    slug = models.SlugField(unique=True)
 
-	def save(self, *args, **kwargs):
-		self.slug = slugify(self.name)
-		super(Genre, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Genre, self).save(*args, **kwargs)
 
-	class Meta:
-		verbose_name_plural = 'Genres'
+    class Meta:
+        verbose_name_plural = 'Genres'
 
-	def __str__(self):
-		return self.name
+    def __str__(self):
+        return self.name
 
 class Movie(models.Model):
 
-	title = models.CharField(max_length=128)
-	trailer = models.URLField()
-	genre = models.CharField(max_length=128)
-	views = models.IntegerField(default=0)
-	image = models.ImageField(upload_to="movie_thumb",blank=False)
-	picture = models.ImageField(upload_to='profile_images', blank=False, default='profile_images/default.png')
-	thumb = models.ImageField(upload_to='movies',blank=True)
-
-	def __str__(self):
-		return self.title
+    genre = models.ForeignKey(Genre)
+    title = models.CharField(max_length=128)
+    url = models.URLField()
+    views = models.IntegerField(default=0)
+    picture = models.ImageField(upload_to='movies2/', blank=False)
+    thumb=models.ImageField(upload_to='movies2/',blank=False)
+    def __str__(self):
+        return self.title
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -42,29 +40,33 @@ class UserProfile(models.Model):
 
 class VideoPost(models.Model):
 
-	title = models.CharField(max_length=200)
-	text = models.TextField()
-	created_date = models.DateTimeField(default=timezone.now)
-	published_date = models.DateTimeField(blank=True, null=True)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
 
-	def publish(self):
-		self.published_date = timezone.now()
-		self.save()
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
 
-	def __str__(self):
-		return self.title
+    def __str__(self):
+        return self.title
 
 class Comment(models.Model):
 
-	VideoPost = models.ForeignKey('letswatch.VideoPost', on_delete=models.CASCADE, related_name='comments')
-	author = models.CharField(max_length=200)
-	text = models.TextField()
-	created_date = models.DateTimeField(default=timezone.now)
-	approved_comment = models.BooleanField(default=False)
+    VideoPost = models.ForeignKey('letswatch.VideoPost', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
 
-	def approve(self):
-		self.approved_comment = True
-		self.save()
+    def approve(self):
+        self.approved_comment = True
+        self.save()
 
-	def __str__(self):
-		return self.text
+    def __str__(self):
+        return self.text
+
+class Hotel(models.Model): 
+    name = models.CharField(max_length=50) 
+    hotel_Main_Img = models.ImageField(upload_to='images/') 

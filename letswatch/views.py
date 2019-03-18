@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from letswatch.models import Genre, Movie
-from letswatch.forms import GenreForm, MovieForm, UserProfileForm, ProfileForm
+from letswatch.forms import GenreForm, MovieForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -10,6 +10,8 @@ from letswatch.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
+from letswatch.models import Hotel
+from letswatch.forms import HotelForm
 def index(request):
     context_dict = {'boldmessage': "Testing"}
     response = render(request, 'letswatch/index.html', context=context_dict)
@@ -44,7 +46,7 @@ def show_genre(request, genre_name_slug):
         context_dict['movies'] = None
 
     # Go render the response and return it to the client.
-    return render(request, 'letswatch/genre.html', context_dict)
+    return render(request, 'letswatch/gallery.html', context_dict)
 
 @login_required
 def add_genre(request):
@@ -72,42 +74,6 @@ def add_genre(request):
     # Render the form with error messages (if any).
     return render(request, 'letswatch/add_genre.html', {'form': form})
 
-def rate_movie(request, movie_name_slug):
-    if request.method == 'POST':
-        # check the user is logged in
-        if not request.user.is_anonymous():
-                # grab the user rating from the POST data
-                user_rating = request.POST.get('rating')
-
-                # check the rating is within the allowed bounds (1-5)
-                if user_rating > 0 or user_rating <= 5:
-                    movie = Movie.objects.get(slug=movie_name_slug)
-                    userprofile = request.user.userprofile
-
-                    review, created = Review.objects.get_or_create(user=userprofile, movie=movie)
-
-                    review.rating = user_rating
-                    review.save()
-
-                    return HttpResponse('rated')
-        else:
-            return HttpResponse('unauthenticated')
-
-        return HttpResponse('not rated')
-
-    else:
-        return redirect('index')
-
-def add_user_ratings_to_movie(user, movie):
-    user_review = movie.reviews.filter(user=user.userprofile)
-
-    if len(user_review) > 0:
-        movie.user_rating = user_review[0].rating
-    else:
-        movie.user_rating = 0
-
-    return movie
-
 @login_required
 def add_movie(request, genre_name_slug):
     try:
@@ -115,30 +81,32 @@ def add_movie(request, genre_name_slug):
     except Genre.DoesNotExist:
         genre = None
 
-    form = MovieForm()
+    #form = MovieForm(data=request.POST)
     if request.method == 'POST':
-        form = MovieForm(request.POST)
+        form = MovieForm(request.POST,request.FILES)
         if form.is_valid():
             if genre:
                 movie = form.save(commit=False)
                 movie.genre = genre
                 movie.views = 0
+                if 'picture' in request.FILES:
+                    movie.picture=request.FILES['picture']
+                if 'thumb' in request.FILES:
+                    movie.thumb=request.FILES['thumb']
                 movie.save()
                 return show_genre(request, genre_name_slug)
         else:
             print(form.errors)
+    else: 
+        form=MovieForm()        
     context_dict = {'form':form, 'genre':genre}
     return render(request, 'letswatch/add_movie.html', context_dict)
 
 def register(request):
-    # if request.user.is_authenticated():
-    #     return HttpResponseRedirect(reverse('index'))
-
 	registered=False
-
 	if request.method == 'POST':
-		user_form = UserForm(data=request.POST)
-		profile_form = UserProfileForm(data=request.POST)
+		user_form = UserForm(request.POST,request.FILES)
+		profile_form = UserProfileForm(request.POST,request.FILES)
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
@@ -205,10 +173,6 @@ def deactivate_profile(request):
 
     return render(request, 'letswatch/deactivate_profile.html', context=context_dict)
 
-@login_required
-def home(request):
-    return render(request, 'letswatch/index.html')
-
 def profile(request, username):
     try:
         user = User.objects.get(username=username)
@@ -265,3 +229,22 @@ def search(request):
 
 def about(request):
     return HttpResponse("About us page")
+
+
+ 
+# Create your views here. 
+def hotel_image_view(request): 
+  
+    if request.method == 'POST': 
+        form = HotelForm(request.POST, request.FILES) 
+  
+        if form.is_valid(): 
+            form.save() 
+            return redirect('success') 
+    else: 
+        form = HotelForm() 
+    return render(request, 'letswatch/list.html', {'form' : form}) 
+  
+  
+def success(request): 
+    return HttpResponse('successfuly uploaded') 

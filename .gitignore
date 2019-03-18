@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+templates/.DS_Store
+letswatch/static/.DS_Store
+letswatch/.DS_Store
+.DS_Store

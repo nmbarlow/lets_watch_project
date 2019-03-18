@@ -31,6 +31,16 @@ class Page(models.Model):
 	def __str__(self):
 		return self.title
 
+class Movie(models.Model):
+	
+	title=models.CharField(max_length=128)
+	trailer=models.URLField()
+	genre= models.CharField()
+	views=models.IntegerField(default=0)
+	image=models.ImageField(upload_to="movie_thumb",blank=False)
+	def __str__(self):
+		return self.title
+
 class UserProfile(models.Model):
 	user =models.OneToOneField(User,on_delete=models.CASCADE,)
 	website=models.URLField(blank=True)

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from rango.models import Page, Category, UserProfile
+from rango.models import Page, Category, UserProfile,Movie
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128,help_text="Please enter the category name.")
@@ -29,6 +29,23 @@ class PageForm (forms.ModelForm):
         model=Page
 
         exclude=('category',)
+
+class MovieForm (forms.ModelForm):
+
+    title =forms.CharField(max_length=128,help_text="Please enter the name of the movie.")
+    trailer=forms.URLField(max_length=200,help_text="Please enter the URL of the movie.")
+    genre= forms.ChoiceField(choices={"comedy","action","horror"})
+    views =forms.IntegerField(widget=forms.HiddenInput(),initial=0)
+    image=forms.ImageField()
+    #check for correct url
+    def clean(self):
+        cleaned_data=self.cleaned_data
+        url=cleaned_data.get('url')
+        
+    class Meta:
+        model=Page
+
+     
 
 
 class UserForm(forms.ModelForm):

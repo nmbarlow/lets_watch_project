@@ -25,12 +25,12 @@ User profile
 							<p><strong>About:</strong> Web Designer / UI. </p>
 							<p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
 							<p><strong>Skills: </strong>
-								<span class="label label-info tags">html5</span>
+								<span class="label label-info tags">html5</span> 
 								<span class="label label-info tags">css3</span>
 								<span class="label label-info tags">jquery</span>
 								<span class="label label-info tags">bootstrap3</span>
 							</p>
-						</div><!--/col-->
+						</div><!--/col-->          
 						<div class="col-xs-12 col-sm-4 text-center">
 
 							<img src="{{MEDIA_URL}}/user.jpg" alt="" class="center-block img-thumbnail img-responsive border">
@@ -46,16 +46,16 @@ User profile
 						</div><!--/col-->
 
 						<div class="col-xs-12 col-sm-4">
-
+							
 							 <form id="profile_form" action="{% url 'profile' user.username%}" enctype="multipart/form-data" method="post" name="upload">
 								{%csrf_token%}
 								{{userprofile.as_p}}
 								<button class="btn btn-block send-button tx-tfm" type="submit" value="Register" name="submit"><span class="fa fa-plus-circle"></span> Upload </button>
-
-								</form>
+								
+								</form> 
 
 								</div><!--/col-->
-
+								
 							</div><!--/row-->
 						</div><!--/panel-body-->
 					</div><!--/panel-->

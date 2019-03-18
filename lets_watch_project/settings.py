@@ -12,11 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
@@ -26,9 +25,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = ')ju96h9$p+#f20ts&$2ht&86eccke)t)jciel6xpd1!pjw(0ug'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['http://letuswatch.pythonanywhere.com/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['http://letuswatch.pythonanywhere.com/', '127.0.0.1']
 
 
 # Application definition
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'letswatch',
-    'social_django',
+    # 'search',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -53,7 +52,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'lets_watch_project.urls'
@@ -70,21 +68,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
-
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = ['http://127.0.0.1:8000/']
 
 WSGI_APPLICATION = 'lets_watch_project.wsgi.application'
 
@@ -141,20 +128,72 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-#login files
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'index'
+# # im not sure if this is working yet!
+# SOCIAL_AUTH_PIPELINE = (
+#     'social_core.pipeline.social_auth.social_details',
+#     'social_core.pipeline.social_auth.social_uid',
+#     'social_core.pipeline.social_auth.auth_allowed',
+#     'social_core.pipeline.social_auth.social_user',
+#     'social_core.pipeline.user.get_username',
+#     'social_core.pipeline.user.create_user',
+#     'lets_watch_project.pipeline.user.create_user',
+#     'social_core.pipeline.social_auth.associate_user',
+#     'social_core.pipeline.social_auth.load_extra_data',
+#     'social_core.pipeline.user.user_details',
+# )
+#
+# SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
+# SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
+#
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 
-#twitter API keys
-SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
-SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
 
-#facebook login will only work when the app is deployed on pythonanywhere
-#facebook API keys
-SOCIAL_AUTH_FACEBOOK_KEY = '850859908595144'
-SOCIAL_AUTH_FACEBOOK_SECRET = '76c3662e91c0215333671f4180e090a6'
+# google api key GOOGLE_KEY 'AIzaSyB9Fn6ws_C1eAjmx9Hmxd3RlcobnSHkyr4'
 
-#google API keys
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '359764519634-5l7h60qr1ine7300a7emtlqp7vpafo4j.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET  = 'G6RHpNhIOm7SCKOStrn8Ktk_'
+# facebook - not exactly sure what file it will go in to, but its JavaScript
+# <script>
+#   window.fbAsyncInit = function() {
+#     FB.init({
+#       appId      : '{your-app-id}',
+#       cookie     : true,
+#       xfbml      : true,
+#       version    : '{api-version}'
+#     });
+#
+#     FB.AppEvents.logPageView();
+#
+#   };
+#
+#   (function(d, s, id){
+#      var js, fjs = d.getElementsByTagName(s)[0];
+#      if (d.getElementById(id)) {return;}
+#      js = d.createElement(s); js.id = id;
+#      js.src = "https://connect.facebook.net/en_US/sdk.js";
+#      fjs.parentNode.insertBefore(js, fjs);
+#    }(document, 'script', 'facebook-jssdk'));
+# </script>
+
+  # check log in status
+    # FB.getLoginStatus(function(response) {
+    #     statusChangeCallback(response);
+    # });
+
+    # {
+    #     status: 'connected',
+    #     authResponse: {
+    #         accessToken: '...',
+    #         expiresIn:'...',
+    #         signedRequest:'...',
+    #         userID:'...'
+    #     }
+    # }
+
+    # button
+    # function checkLoginState() {
+    #   FB.getLoginStatus(function(response) {
+    #     statusChangeCallback(response);
+    #   });
+    # }

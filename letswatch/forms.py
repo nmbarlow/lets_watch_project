@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from letswatch.models import Genre, Movie, UserProfile
-# Hotel
+from letswatch.models import Genre, Movie, UserProfile,Hotel
 
 class GenreForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the genre name.")
@@ -15,23 +14,24 @@ class GenreForm(forms.ModelForm):
         model = Genre
         fields = ('name',)
 
-class MovieForm (forms.ModelForm):
+class MovieForm(forms.ModelForm):
+    title = forms.CharField(max_length=128, help_text="Please enter the title of the movie.")
+    url = forms.URLField(max_length=200, help_text="Please enter the URL of the movie.")
+    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    picture=forms.ImageField(required=False, label="Picture")
+    thumb=forms.ImageField(required=False, label="thumb")
 
-    title = forms.CharField(max_length=128,help_text="Please enter the name of the movie.")
-    trailer = forms.URLField(max_length=200,help_text="Please enter the URL of the movie.")
-    genre = forms.ChoiceField(choices={"comedy","action","horror"})
-    views = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
-    picture = forms.ImageField(required=False, label="Picture")
-    thumb = forms.ImageField(required=False, label="thumb")
-    image = forms.ImageField()
-
-    #check for correct url
     def clean(self):
-        cleaned_data=self.cleaned_data
-        url=cleaned_data.get('url')
+        cleaned_data = self.cleaned_data
+        url = cleaned_data.get('url')
 
-    class Meta:
-        model = Genre
+        # If url is not empty and doesn't start with 'http://',
+        # then prepend 'http://'.
+        if url and not url.startswith('http://'):
+            url = 'http://' + url
+            cleaned_data['url'] = url
+
+            return cleaned_data
 
     class Meta:
         # Provide an association between the ModelForm and a model
@@ -45,22 +45,24 @@ class MovieForm (forms.ModelForm):
         exclude = ('genre',)
         # or specify the fields to include (i.e. not include the genre field)
         # fields = ('title', 'url', 'views')
+       
 
-email=forms.CharField(widget=forms.TextInput(attrs=
+class UserForm(forms.ModelForm):
+    email=forms.CharField(widget=forms.TextInput(attrs=
         {'name':'email',
         'class':'form-control my-input',
         'id':'email',
         'placeholder':'Email',
         }),label=""
     )
-username=forms.CharField(widget=forms.TextInput(attrs=
+    username=forms.CharField(widget=forms.TextInput(attrs=
         {'name':'name',
         'class':'form-control my-input',
         'id':'name',
         'placeholder':'Name',
         }),label=""
     )
-password = forms.CharField(widget=forms.PasswordInput(
+    password = forms.CharField(widget=forms.PasswordInput(
         attrs=
         {'name':'password',
         'class':'form-control my-input',
@@ -71,7 +73,7 @@ password = forms.CharField(widget=forms.PasswordInput(
         }),label="")
 
 #An inline class to provide additional information on the form.
-class Meta:
+    class Meta:
         # Provide an association between the ModelForm and a model
         model = User
         fields = ('username', 'email', 'password')
@@ -91,8 +93,8 @@ class ProfileForm(forms.ModelForm):
         model = User
         fields = ('password',)
 
-# class HotelForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = Hotel
-#         fields = ['name', 'hotel_Main_Img']
+class HotelForm(forms.ModelForm): 
+  
+    class Meta: 
+        model = Hotel 
+        fields = ['name', 'hotel_Main_Img'] 
