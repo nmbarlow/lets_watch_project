@@ -5,26 +5,36 @@
     Add a movie
 {% endblock %}
 
+    {% block headblock %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    {% endblock %}
 {% block body_block %}
 
     <h1>Add a movie</h1>
         {% if genre %}
-            <div>
+        <div class="row">
+         <div class="col-md-4 mx-auto">
+            <div class="myform form ">
+        <div class="text-center ">
+            <div class="form-control my-input">
 
                 <form id="movie_form" method="post" action="/letswatch/genre/{{genre.slug}}/add_movie/" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for hidden in form.hidden_fields %}
-                        {{hidden}}
-                    {% endfor %}
-                    {% for field in form.visible_fields %}
-                        {{field.errors}}
-                        {{field.help_text}}
-                        {{field}}
-                    {% endfor %}
-                    <input type="submit" name="submit" value="Add movie" />
+                   {{form.as_p}}
+                    <input type="submit" name="submit" value="Add movie" class=" btn btn-block send-button tx-tfm"/>
                 </form>
 
             </div>
+        </div>
+    </div>
+</div>
+</div>
         {% else %}
             A genre by this name does not exist.
         {% endif%}
