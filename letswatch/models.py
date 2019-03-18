@@ -33,7 +33,7 @@ class Movie(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
+	picture = models.ImageField(upload_to='profile_images', blank=False, default='profile_images/default.png')
 
 	def __str__(self):
 		return self.user.username

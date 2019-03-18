@@ -79,11 +79,11 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 class UserProfileForm(forms.ModelForm):
-    profile_picture = forms.ImageField(required=False, label="")
+    picture = forms.ImageField(required=True, label="")
 
     class Meta:
         model = UserProfile
-        fields = ('profile_picture',)
+        fields = ('picture',)
 
 class ProfileForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

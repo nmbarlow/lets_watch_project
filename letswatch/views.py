@@ -181,19 +181,19 @@ def profile(request, username):
 
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
 
-    form = UserProfileForm({'picture': userprofile.picture})
+    profile_form = UserProfileForm({'picture': userprofile.picture})
 
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect('user_profile', user.username)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if profile_form.is_valid():
+            profile_form.save(commit=True)
+            return redirect('profile', user.username)
         else:
-            print(form.errors)
+            print(profile_form.errors)
 
     return render(request, 'letswatch/userprofile.html',
-                  {'userprofile': userprofile, 'user': user, 'form': form})
+                  {'userprofile': userprofile, 'user': user, 'form': profile_form})
 
 
 @login_required
