@@ -11,7 +11,7 @@
         {% if genre %}
             <div>
 
-                <form id="movie_form" method="post" action="/rango/genre/{{genre.slug}}/add_movie/">
+                <form id="movie_form" method="post" action="/letswatch/genre/{{genre.slug}}/add_movie/">
                     {% csrf_token %}
                     {% for hidden in form.hidden_fields %}
                         {{hidden}}

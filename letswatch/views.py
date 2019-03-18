@@ -44,7 +44,7 @@ def show_genre(request, genre_name_slug):
         context_dict['movies'] = None
 
     # Go render the response and return it to the client.
-    return render(request, 'rango/genre.html', context_dict)
+    return render(request, 'letswatch/genre.html', context_dict)
 
 @login_required
 def add_genre(request):
@@ -70,7 +70,7 @@ def add_genre(request):
 
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    return render(request, 'rango/add_genre.html', {'form': form})
+    return render(request, 'letswatch/add_genre.html', {'form': form})
 
 @login_required
 def add_movie(request, genre_name_slug):
@@ -92,7 +92,7 @@ def add_movie(request, genre_name_slug):
         else:
             print(form.errors)
     context_dict = {'form':form, 'genre':genre}
-    return render(request, 'rango/add_movie.html', context_dict)
+    return render(request, 'letswatch/add_movie.html', context_dict)
 
 def register(request):
 	registered=False

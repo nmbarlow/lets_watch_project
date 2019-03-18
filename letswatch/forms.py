@@ -18,6 +18,8 @@ class MovieForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the movie.")
     url = forms.URLField(max_length=200, help_text="Please enter the URL of the movie.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    picture=forms.ImageField(required=False, label="Picture")
+    thumb=forms.ImageField(required=False, label="thumb")
 
     def clean(self):
         cleaned_data = self.cleaned_data

@@ -26,7 +26,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=128)
     url = models.URLField()
     views = models.IntegerField(default=0)
-
+    picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
+    thumb=models.ImageField(upload_to='movies',blank=True)
     def __str__(self):
         return self.title
 
