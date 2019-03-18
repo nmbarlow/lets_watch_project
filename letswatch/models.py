@@ -26,8 +26,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=128)
     url = models.URLField()
     views = models.IntegerField(default=0)
-    picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
-    thumb=models.ImageField(upload_to='movies',blank=True)
+    picture = models.ImageField(upload_to='movies2/', blank=False)
+    thumb=models.ImageField(upload_to='movies2/',blank=False)
     def __str__(self):
         return self.title
 
@@ -66,3 +66,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+class Hotel(models.Model): 
+    name = models.CharField(max_length=50) 
+    hotel_Main_Img = models.ImageField(upload_to='images/') 

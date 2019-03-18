@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from letswatch.models import Genre, Movie, UserProfile
+from letswatch.models import Genre, Movie, UserProfile,Hotel
 
 class GenreForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the genre name.")
@@ -45,6 +45,7 @@ class MovieForm(forms.ModelForm):
         exclude = ('genre',)
         # or specify the fields to include (i.e. not include the genre field)
         # fields = ('title', 'url', 'views')
+       
 
 class UserForm(forms.ModelForm):
     email=forms.CharField(widget=forms.TextInput(attrs=
@@ -91,3 +92,9 @@ class ProfileForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = User
         fields = ('password',)
+
+class HotelForm(forms.ModelForm): 
+  
+    class Meta: 
+        model = Hotel 
+        fields = ['name', 'hotel_Main_Img'] 

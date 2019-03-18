@@ -11,8 +11,12 @@ urlpatterns = [
     url(r'^register/$',
         views.register,
         name='register'),
-    url(r'^login/$', views.user_login, name='login'),
+    url(r'^login/$', views.user_login, name='login'),\
     url(r'^logout/$', views.user_logout, name='logout'),
+    
+    url(r'^image_upload/$', views.hotel_image_view, name='image_upload'),
+    url(r'^success/$', views.success, name='success'),
+    
     # url(r'^signup/$', views.signup, name='signup'),
     url(r'^profile/(?P<username>[\w\-]+)/$',views.profile, name='profile'),
 
