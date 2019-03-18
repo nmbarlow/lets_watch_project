@@ -28,6 +28,15 @@ class Movie(models.Model):
     views = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='movies2/', blank=False)
     thumb=models.ImageField(upload_to='movies2/',blank=False)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Movie, self).save(*args, **kwargs)
+
+
+    class Meta:
+        verbose_name_plural = 'Movies'
     def __str__(self):
         return self.title
 
