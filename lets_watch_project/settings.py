@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    # 'django.contrib.sites', - does not allow access to admin page
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'letswatch',
