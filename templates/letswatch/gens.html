@@ -1,0 +1,9 @@
+<ul>
+    {% if gens %}
+        {% for g in gens %}
+            <li><a href="{% url 'show_genre' g.slug %}">{{g.name}}</a></li>
+        {% endfor %}
+    {% else %}
+        <li><strong>There are no genres present.</strong></li>
+    {% endif %}
+</ul>

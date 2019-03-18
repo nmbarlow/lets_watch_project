@@ -1,0 +1,27 @@
+{% extends 'letswatch/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ genre.name }}
+{% endblock %}
+
+{% block body_block %}
+    {% if genre %}
+        <h1> {{ genre.name }}</h1>
+
+        {% if movies %}
+            <ul>
+                {% for movie in movies %}
+                    <li><a href="{{ movie.url }}">{{movie.title}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No movies currently in genre.</strong>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_movie' genre.slug %}">Add a movie</a>
+        {% endif %}
+    {% else %}
+        The specified genre does not exist!
+    {% endif %}
+{% endblock %}
