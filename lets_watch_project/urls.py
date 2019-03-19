@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^letswatch/', include('letswatch.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^search/', include('search.urls', namespace='search')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

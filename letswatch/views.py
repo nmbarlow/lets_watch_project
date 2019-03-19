@@ -12,6 +12,11 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from letswatch.models import Hotel
 from letswatch.forms import HotelForm
+
+@login_required
+def home(request):
+    return render(request, 'letswatch/home.html')
+
 def index(request):
     context_dict = {'boldmessage': "Testing"}
     response = render(request, 'letswatch/index.html', context=context_dict)
@@ -62,18 +67,18 @@ def show_movie(request, movie_title_slug):
 
         # Retrieve all of the associated movies.
         # Note that filter() will return a list of movie objects or an empty list
-        
+
         #Adds our results list to the template context under name movies.
         context_dict['movie'] = movie
         # We also add the genre object from
         # the database to the context dictionary.
         # We'll use this in the template to verify that the genre exists.
-        
+
     except Movie.DoesNotExist:
         # We get here if we didn't find the specified genre.
         # Don't do anything -
         # the template will display the "no genre" message for us.
-        
+
         context_dict['movie'] = None
 
     # Go render the response and return it to the client.
@@ -129,8 +134,8 @@ def add_movie(request, genre_name_slug):
                 return show_genre(request, genre_name_slug)
         else:
             print(form.errors)
-    else: 
-        form=MovieForm()        
+    else:
+        form=MovieForm()
     context_dict = {'form':form, 'genre':genre}
     return render(request, 'letswatch/add_movie.html', context_dict)
 
@@ -263,20 +268,20 @@ def about(request):
     return HttpResponse("About us page")
 
 
- 
-# Create your views here. 
-def hotel_image_view(request): 
-  
-    if request.method == 'POST': 
-        form = HotelForm(request.POST, request.FILES) 
-  
-        if form.is_valid(): 
-            form.save() 
-            return redirect('success') 
-    else: 
-        form = HotelForm() 
-    return render(request, 'letswatch/list.html', {'form' : form}) 
-  
-  
-def success(request): 
-    return HttpResponse('successfuly uploaded') 
+
+# Create your views here.
+def hotel_image_view(request):
+
+    if request.method == 'POST':
+        form = HotelForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = HotelForm()
+    return render(request, 'letswatch/list.html', {'form' : form})
+
+
+def success(request):
+    return HttpResponse('successfuly uploaded')
