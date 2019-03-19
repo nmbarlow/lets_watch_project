@@ -25,6 +25,7 @@ class Movie(models.Model):
     genre = models.ForeignKey(Genre)
     title = models.CharField(max_length=128)
     url = models.URLField()
+    year = models.CharField(max_length=4)
     views = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='movies2/', blank=False)
     thumb=models.ImageField(upload_to='movies2/',blank=False)
@@ -33,12 +34,6 @@ class Movie(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Movie, self).save(*args, **kwargs)
-
-
-    class Meta:
-        verbose_name_plural = 'Movies'
-    def __str__(self):
-        return self.title
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
@@ -76,6 +71,6 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
 
-class Hotel(models.Model): 
-    name = models.CharField(max_length=50) 
-    hotel_Main_Img = models.ImageField(upload_to='images/') 
+class Hotel(models.Model):
+    name = models.CharField(max_length=50)
+    hotel_Main_Img = models.ImageField(upload_to='images/')
