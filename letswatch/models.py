@@ -69,7 +69,7 @@ class Review(models.Model):#(comments)
         unique_together = ('user', 'movie',)
 
     def __str__(self):
-        return self.user.user.username + ": " + self.movie.name
+        return self.user.user.username + ": " + self.movie.title
 
     def __unicode__(self):
         return self.user.user.username + ": " + self.movie.name

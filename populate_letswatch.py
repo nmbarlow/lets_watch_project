@@ -125,8 +125,8 @@ def populate():
         for m in Movie.objects.filter(genre=g):
             print( "- {0} - {1}". format(str(g), str(m)))
 
-def add_movie(gen, title, url, year):
-    m = Movie.objects.get_or_create(genre=gen, title=title)[0]
+def add_movie(genre, title, url, year):
+    m = Movie.objects.get_or_create(genre=genre, title=title)[0]
     m.url=url
     m.year=year
     m.save()
@@ -136,6 +136,16 @@ def add_gen(name,):
     g = Genre.objects.get_or_create(name=name)[0]
     g.save()
     return g
+
+def add_review(movie):
+    r = Review.objects.create(
+                user=user,
+                movie=movie,
+                date=data['date'],
+                rating=data['rating'],
+                content=data['content'],)
+    r.save()
+    return r
 
 # Execution will start here as the others are 'methods' and therefore will not run
 # unless they are called specifically.
