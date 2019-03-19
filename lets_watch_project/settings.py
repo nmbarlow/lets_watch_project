@@ -110,6 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2'  # for Google authentication
+    'social_core.backends.twitter.TwitterOAuth',    # for Twitter authentication
+    'social_core.backends.facebook.FacebookOAuth2', # for Facebook authentication
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -133,14 +141,6 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-UTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.facebook.FacebookOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
@@ -153,6 +153,9 @@ SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q
 SOCIAL_AUTH_FACEBOOK_KEY = '850859908595144'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '76c3662e91c0215333671f4180e090a6'  # App Secret
 
+#google keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '359764519634-8b9apv4q76atui8lresisje3kbbi8p3c.apps.googleusercontent.com' #'AIzaSyB9Fn6ws_C1eAjmx9Hmxd3RlcobnSHkyr4'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '__5dhf2KtxhTgG5692_sHo39'
 
 # # im not sure if this is working yet!
 # SOCIAL_AUTH_PIPELINE = (
