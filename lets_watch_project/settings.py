@@ -145,8 +145,14 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 
+#twitter keys
 SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
 SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
+
+#facebook keys
+SOCIAL_AUTH_FACEBOOK_KEY = '850859908595144'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '76c3662e91c0215333671f4180e090a6'  # App Secret
+
 
 # # im not sure if this is working yet!
 # SOCIAL_AUTH_PIPELINE = (
