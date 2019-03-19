@@ -128,6 +128,7 @@ def populate():
 def add_movie(gen, title, url, year):
     m = Movie.objects.get_or_create(genre=gen, title=title)[0]
     m.url=url
+    m.year=year
     m.save()
     return m
 

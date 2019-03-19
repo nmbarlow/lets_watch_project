@@ -17,6 +17,7 @@ class GenreForm(forms.ModelForm):
 class MovieForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the movie.")
     url = forms.URLField(max_length=200, help_text="Please enter the URL of the movie.")
+    yeah = forms.CharField(max_length=4, help_text="Please enter the year of the movie.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     picture=forms.ImageField(required=False, label="Picture")
     thumb=forms.ImageField(required=False, label="thumb")
@@ -46,7 +47,7 @@ class MovieForm(forms.ModelForm):
         exclude = ('genre',)
         # or specify the fields to include (i.e. not include the genre field)
         # fields = ('title', 'url', 'views')
-       
+
 
 class UserForm(forms.ModelForm):
     email=forms.CharField(widget=forms.TextInput(attrs=
@@ -94,8 +95,8 @@ class ProfileForm(forms.ModelForm):
         model = User
         fields = ('password',)
 
-class HotelForm(forms.ModelForm): 
-  
-    class Meta: 
-        model = Hotel 
-        fields = ['name', 'hotel_Main_Img'] 
+class HotelForm(forms.ModelForm):
+
+    class Meta:
+        model = Hotel
+        fields = ['name', 'hotel_Main_Img']
