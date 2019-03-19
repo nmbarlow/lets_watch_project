@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE',
 # Must do this way else will get an exception as infrastructure not been initialised yet
 import django
 django.setup() # Import Django project's settings
-from letswatch.models import Genre, Movie
+from letswatch.models import Genre, Movie, Review
 
 def populate():
     # First, we will create lists of dictionaries containing the movies

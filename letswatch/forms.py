@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from letswatch.models import Genre, Movie, UserProfile,Hotel
+from letswatch.models import Genre, Movie, UserProfile, Review, Hotel
 
 class GenreForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the genre name.")
@@ -100,3 +100,13 @@ class HotelForm(forms.ModelForm):
     class Meta:
         model = Hotel
         fields = ['name', 'hotel_Main_Img']
+
+class ReviewForm(forms.ModelForm):
+
+    # date = forms.DateField(widget=forms.HiddenInput(), initial = datetime,required=False)
+    rating = forms.IntegerField(widget=forms.HiddenInput(), initial =0)
+    content = forms.TextInput()
+
+    class Meta:
+        model = Review
+        fields = ['date','rating', 'content',]

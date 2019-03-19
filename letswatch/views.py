@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from letswatch.models import Genre, Movie
-from letswatch.forms import GenreForm, MovieForm, UserForm, UserProfileForm
+from letswatch.models import Genre, Movie, Review
+from letswatch.forms import GenreForm, MovieForm, UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -232,6 +232,35 @@ def profile(request, username):
     return render(request, 'letswatch/userprofile.html',
                   {'userprofile': userprofile, 'user': user, 'form': profile_form})
 
+@login_required
+def add_review(request, movie_name_slug):
+    movie = Movie.objects.get(slug=movie_name_slug)
+    reviewer = request.user.userprofile
+
+    if request.method == 'POST':
+        form = ReviewForm(data=request.POST)
+        response_data = {}
+
+        if form.is_valid():
+            if movie and reviewer:
+                review, created = Review.objects.get_or_create(user=author, movie=movie)
+                review.movie = movie
+                review.user = reviewer
+                review.content = form.cleaned_data.get('content')
+                review.rating = form.cleaned_data.get('rating')
+                review.date = form.cleaned_data.get('date')
+
+                review.save()
+                response_data['result'] = 'Review successful'
+                return HttpResponse(
+                    json.dumps(response_data),
+                    content_type="application/json"
+                )
+            else:
+                print(form.errors)
+        else:
+            pass
+
 
 @login_required
 def movie_rate(request):
@@ -268,6 +297,17 @@ def about(request):
     return HttpResponse("About us page")
 
 
+@login_required
+def my_reviews(request, username):
+    reviewer = User.objects.filter(username=username).first()
+    reviews = reviewer.userprofile.reviews.all()
+
+    context = {
+        "reviews": reviews,
+        "reviewer": reviewer
+    }
+
+    return render(request, 'letswatch/my_reviews.html', context)
 
 # Create your views here.
 def hotel_image_view(request):

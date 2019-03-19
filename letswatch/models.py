@@ -56,20 +56,23 @@ class VideoPost(models.Model):
     def __str__(self):
         return self.title
 
-class Comment(models.Model):
+class Review(models.Model):#(comments)
 
-    VideoPost = models.ForeignKey('letswatch.VideoPost', on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
+    date = models.DateField(blank=True, null=True)
+    rating = models.PositiveSmallIntegerField(blank=True, null=True)
+    content = models.TextField(blank=True)
+    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='reviews')
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='reviews')
 
-    def approve(self):
-        self.approved_comment = True
-        self.save()
+    class Meta:
+        # user and the movie as primary key
+        unique_together = ('user', 'movie',)
 
     def __str__(self):
-        return self.text
+        return self.user.user.username + ": " + self.movie.name
+
+    def __unicode__(self):
+        return self.user.user.username + ": " + self.movie.name
 
 class Hotel(models.Model):
     name = models.CharField(max_length=50)
