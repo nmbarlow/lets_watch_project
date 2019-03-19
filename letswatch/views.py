@@ -48,6 +48,38 @@ def show_genre(request, genre_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'letswatch/gallery.html', context_dict)
 
+
+def show_movie(request, movie_title_slug):
+    #Create a context dictionary which we can pass
+    # to the template rendering engine.
+    context_dict = {}
+
+    try:
+        # Can we find a genre name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # So the .get() method returns one model instance or raises an exception.
+        movie = Movie.objects.get(slug=movie_title_slug)
+
+        # Retrieve all of the associated movies.
+        # Note that filter() will return a list of movie objects or an empty list
+        
+        #Adds our results list to the template context under name movies.
+        context_dict['movie'] = movie
+        # We also add the genre object from
+        # the database to the context dictionary.
+        # We'll use this in the template to verify that the genre exists.
+        
+    except Movie.DoesNotExist:
+        # We get here if we didn't find the specified genre.
+        # Don't do anything -
+        # the template will display the "no genre" message for us.
+        
+        context_dict['movie'] = None
+
+    # Go render the response and return it to the client.
+    return render(request, 'letswatch/show_movie.html', context_dict)
+
+
 @login_required
 def add_genre(request):
     form = GenreForm()

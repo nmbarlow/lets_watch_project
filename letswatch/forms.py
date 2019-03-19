@@ -20,6 +20,7 @@ class MovieForm(forms.ModelForm):
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     picture=forms.ImageField(required=False, label="Picture")
     thumb=forms.ImageField(required=False, label="thumb")
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data

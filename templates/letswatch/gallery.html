@@ -32,6 +32,7 @@
 								<h6 class="clrd-font">{{movie.title}}</h6>
 								<p class="clrd-font product_price"> <i class="fa clrd-font" aria-hidden="true"></i> {{movie.views}}</p>
 								<a href="{{movie.url}}" class="btn btn-primary">Click here</a>
+								<a href="{% url 'show_movie' movie.slug %}" class="btn btn-primary">take me to the profile</a>
 							</div>
 							<a class="fancybox" rel="ligthbox" href="http://i.imgur.com/PUeaHfC.png">
 								
