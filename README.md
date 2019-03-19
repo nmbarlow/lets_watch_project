@@ -1,8 +1,8 @@
 # lets_watch_project
 
-python 3+
-django 1.9.10
-pip install social-auth-app-django
-python manage.py makemigrations
-python manage.py migrate
-python populate_letswatch.py letswatch
+python 3+ <br>
+django 1.9.10<br>
+pip install social-auth-app-django<br>
+python manage.py makemigrations<br>
+python manage.py migrate<br>
+python populate_letswatch.py letswatch<br>
