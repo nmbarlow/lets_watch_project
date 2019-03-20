@@ -357,7 +357,7 @@ def hotel_image_view(request):
 def success(request):
     return HttpResponse('successfuly uploaded')
 
-<<<<<<< Updated upstream
+
 
 def search(request):
     if request.method == 'GET':
@@ -380,7 +380,7 @@ def search(request):
 
     else:
         return render(request, 'letswatch/search.html')
-=======
+
 @login_required
 def register_profile(request):
     form=UserProfileForm()
@@ -413,4 +413,4 @@ def profile(request, username):
         else:
             print(form.errors)
     return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form}) 
->>>>>>> Stashed changes
+
