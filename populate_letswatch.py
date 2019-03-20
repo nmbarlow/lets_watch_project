@@ -170,10 +170,10 @@ def populate():
             print( "- {0} - {1}". format(str(g), str(m)))
 
 def add_movie(genre, title, url, year, picture, description):
-    m = Movie.objects.get_or_create(genre=genre, title=title, year=year)[0]
+    m = Movie.objects.get_or_create(genre=genre, title=title, year=year, url=url, picture=picture, description=description)[0]
     m.url=url
     m.year=year
-    m.picture
+    m.picture=picture
     m.description=description
     m.save()
     return m
