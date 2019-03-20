@@ -1,9 +1,10 @@
 {% extends 'letswatch/base.html' %}
 {% load staticfiles %}
+
 <h1>Search Page</h1>
 
 <br/>
-<form action="{% url 'search:search' %}" method="GET" value="{{request.GET.q}}">
+<form method="GET" value="{{request.GET.q}}">
 Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search movies"/>
 <input type="submit" name="submit" value="Search"/>
 </form>
