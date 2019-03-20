@@ -35,6 +35,9 @@ class Movie(models.Model):
         self.slug = slugify(self.title)
         super(Movie, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.title
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	picture = models.ImageField(upload_to='profile_images', blank=False, default='profile_images/default.png')
