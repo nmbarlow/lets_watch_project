@@ -13,7 +13,7 @@
             {% for movie in newmovies %}
                 <!-- It shouldn't be the movie's url/trailer but rather a link to the movie page on the site -->
                 <a href="{{ movie.url }}"><img src="{{ MEDIA_URL }}{{ movie.thumb }}"  height="300" width="300" alt="{{ movie.title }}" /></a>
-                <li>{{ movie.title }}, {{ movie.year }}</li>
+                <li>{{ movie.title }}</li>
                 <br>
             {% endfor %}
     {% else %}
