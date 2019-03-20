@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from letswatch.models import UserProfile
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from letswatch.models import Hotel
@@ -290,8 +291,10 @@ def rate_movie(request):
 
             return HttpResponse(likes)
 
+
 def search(request):
     return HttpResponse("Search page")
+
 
 def about(request):
     return HttpResponse("About us page")
@@ -325,3 +328,26 @@ def hotel_image_view(request):
 
 def success(request):
     return HttpResponse('successfuly uploaded')
+
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('q')
+
+        submitbutton = request.GET.get('submit')
+
+        if query is not None:
+            lookups = Q(title__icontains=query)
+
+            results = Movie.objects.filter(lookups).distinct()
+
+            context={'results': results,
+                     'submitbutton': submitbutton}
+
+            return render(request, 'search/search.html', context)
+
+        else:
+            return render(request, 'search/search.html')
+
+    else:
+        return render(request, 'search/search.html')
