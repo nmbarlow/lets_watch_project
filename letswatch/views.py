@@ -325,24 +325,42 @@ def movie_rate(request):
     return render(request, 'letswatch/rate_movie.html', context_dict)
 
 @login_required
-def rate_movie(request):
+def rate_movie(request, movie_name_slug):
+    if request.method == 'POST':
+        # check the user is logged in
+        if request.user.is_authenticated():
+                # grab the user rating from the POST data
+                user_rating = request.POST.get('rating')
 
-    if request.method == 'GET':
+                # check the rating is within the allowed bounds (1-5)
+                if user_rating > 0 or user_rating <= 5:
+                    movie = Movie.objects.get(slug=movie_name_slug)
+                    userprofile = request.user.userprofile
 
-        movie_id = request.GET['movieid']
-        likes = 0
+                    review, created = Review.objects.get_or_create(user=userprofile, movie=movie)
 
-        if movie_id:
-            movie = Movie.objects.get(id=int(movie_id))
+                    review.rating = user_rating
+                    review.save()
 
-            if movie:
-                likes = movie.likes + 1
-                movive.likes = likes
-                movie.save()
+                    return HttpResponse('rated')
+        else:
+            return HttpResponse('unauthenticated')
 
-            return HttpResponse(likes)
+        return HttpResponse('not rated')
 
+    else:
+        return redirect('index')
 
+# helper function that gets the user's stored rating for a movie if it exists
+def add_user_ratings_to_movie(user, movie):
+    user_review = movie.reviews.filter(user=user.userprofile)
+
+    if len(user_review) > 0:
+        movie.user_rating = user_review[0].rating
+    else:
+        movie.user_rating = 0
+
+    return movie
 def search(request):
     return HttpResponse("Search page")
 
