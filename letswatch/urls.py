@@ -15,7 +15,7 @@ urlpatterns = [
     
     url(r'^image_upload/$', views.hotel_image_view, name='image_upload'),
     url(r'^success/$', views.success, name='success'),
-    
+    #url(r'^register_profile/$', views.register_profile, name='register_profile'),
     # url(r'^signup/$', views.signup, name='signup'),
     url(r'^profile/(?P<username>[\w\-]+)/$',views.profile, name='profile'),
 

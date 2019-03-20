@@ -127,6 +127,7 @@ def add_movie(request, genre_name_slug):
                 movie = form.save(commit=False)
                 movie.genre = genre
                 movie.views = 0
+                
                 if 'picture' in request.FILES:
                     movie.picture=request.FILES['picture']
                 if 'thumb' in request.FILES:
@@ -211,27 +212,54 @@ def deactivate_profile(request):
 
     return render(request, 'letswatch/deactivate_profile.html', context=context_dict)
 
-def profile(request, username):
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return redirect('home')
+# def profile(request, username):
+#     try:
+#         user = User.objects.get(username=username)
+#     except User.DoesNotExist:
+#         return redirect('home')
 
-    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+#     userprofile = UserProfile.objects.get_or_create(user=user)[0]
 
-    profile_form = UserProfileForm({'picture': userprofile.picture})
+#     profile_form = UserProfileForm({'picture': userprofile.picture})
 
 
-    if request.method == 'POST':
-        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
-        if profile_form.is_valid():
-            profile_form.save(commit=True)
-            return redirect('profile', user.username)
-        else:
-            print(profile_form.errors)
+#     if request.method == 'POST':
+#         profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+#         if profile_form.is_valid():
+#             profile_form.save(commit=True)
+#             return redirect('profile', user.username)
+#         else:
+#             print(profile_form.errors)
 
-    return render(request, 'letswatch/userprofile.html',
-                  {'userprofile': userprofile, 'user': user, 'form': profile_form})
+#     return render(request, 'letswatch/userprofile.html',
+#                   {'userprofile': userprofile, 'user': user, 'form': profile_form})
+#the one i created
+# def profile(request, username):
+#     try:
+#         user = User.objects.get(username=username)
+#     except User.DoesNotExist:
+#         return redirect('home')
+
+#     userprofile = UserProfile.objects.get_or_create(user=user)[0]
+
+#     form=UserProfileForm()
+#     if request.method == 'POST':
+#         form=UserProfileForm(request.POST,request.FILES,instance=user)
+#         if form.is_valid():
+#             if user:
+#                 userform=form.save(commit=False)
+#                 userform.user=user
+#                 picture=request.FILES['picture']
+#                 userform.picture=picture
+#                 userform.save()
+#                 # form.save()
+#                 return redirect('profile', user.username)
+#                 #return profile(request, user.username)
+#         else:
+#             print(form.errors)
+
+#     context_dict={'form':form,'user':user,'userprofile':userprofile}
+#     return render(request, 'letswatch/userprofile.html', context_dict)
 
 @login_required
 def add_review(request, movie_name_slug):
@@ -329,6 +357,7 @@ def hotel_image_view(request):
 def success(request):
     return HttpResponse('successfuly uploaded')
 
+<<<<<<< Updated upstream
 
 def search(request):
     if request.method == 'GET':
@@ -351,3 +380,37 @@ def search(request):
 
     else:
         return render(request, 'letswatch/search.html')
+=======
+@login_required
+def register_profile(request):
+    form=UserProfileForm()
+    if request.method=='POST':
+        form=UserProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            user_profile=form.save(commit=False)
+            user_profile.user=request.user
+            user_profile.save()
+
+            return redirect('index')
+        else:
+            print(form.errors)
+    context_dict={'form':form}
+    return render(request,'letswatch/profile_registeration.html',context_dict)
+    
+@login_required
+def profile(request, username): 
+    try:
+        user = User.objects.get(username=username) 
+    except User.DoesNotExist:
+        return redirect('index')
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+    form = UserProfileForm({'picture': userprofile.picture})
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile) 
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username) 
+        else:
+            print(form.errors)
+    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form}) 
+>>>>>>> Stashed changes

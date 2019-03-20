@@ -1,0 +1,51 @@
+	{% extends 'letswatch/base.html' %}
+	{% load staticfiles %}
+	{% block headblock %}
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+	{% endblock %}
+	{% block title %}{{ selecteduser.username }} Profile{% endblock %}
+	{% block body_block %}
+<div class="text-center center">
+	<div class="container">
+
+		<div class="row  border border-dark user-details rounded">
+			<div class="col-sm col-md user-details">
+
+				<div class="user-image">
+					<br>
+					<img src="{{ MEDIA_URL }}{{userprofile.picture }}"
+					class="img-thumbnail img-responsive border"
+					alt="{{selecteduser.username}}" />
+
+					<br/> 
+					<h1>Profile</h1>
+					<h1 id="link">@{{selecteduser.username}} </h1>
+					
+					<div>
+						<br>
+
+						<hr class="hr-or">
+						<br>
+						{% if selecteduser.username == user.username %}
+						<form method="post" action="." enctype="multipart/form-data">
+							{% csrf_token %}
+							{{ form.as_p }}
+							<input type="submit" value="Update"  class="send-button" />
+						</form> {% else %}
+					{% endif %} </div>
+					<div id="edit_profile"></div>
+					<br>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	{% endblock %}

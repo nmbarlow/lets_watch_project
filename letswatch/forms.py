@@ -15,12 +15,19 @@ class GenreForm(forms.ModelForm):
         fields = ('name',)
 
 class MovieForm(forms.ModelForm):
-    title = forms.CharField(max_length=128, help_text="Please enter the title of the movie.")
-    url = forms.URLField(max_length=200, help_text="Please enter the URL of the movie.")
-    yeah = forms.CharField(max_length=4, help_text="Please enter the year of the movie.")
+
+    title = forms.CharField(max_length=128,widget=forms.TextInput(
+        attrs={'class':'form-control my-input','placeholder':'Enter the Title of the Movie',}),label="")
+    url = forms.CharField(max_length=200,widget=forms.TextInput(
+        attrs={'class':'form-control my-input','placeholder':'Enter the youtube URL of the Movie',}),label="")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    picture=forms.ImageField(required=False, label="Picture")
-    thumb=forms.ImageField(required=False, label="thumb")
+    year = forms.CharField(max_length=4, required=False,widget=forms.TextInput(
+        attrs={'class':'form-control my-input','placeholder':'Enter the Year of the Movie',}),label="")
+   
+    picture=forms.ImageField(required=False,widget=forms.FileInput(
+        attrs={'class':'form-control my-input',}),label="Please Select the movie poster", )
+    thumb=forms.ImageField(required=False, widget=forms.FileInput(
+        attrs={'class':'form-control my-input',}),label="Please Select the movie thumbnail", )
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
@@ -29,10 +36,14 @@ class MovieForm(forms.ModelForm):
 
         # If url is not empty and doesn't start with 'http://',
         # then prepend 'http://'.
-        if url and not url.startswith('http://'):
-            url = 'http://' + url
-            cleaned_data['url'] = url
+        # if url and not url.startswith('http://'):
+        #     url = 'http://' + url
+        #     cleaned_data['url'] = url
+        if url:
 
+            url=url.replace("http://www.youtube.com/watch?v=","https://www.youtube.com/embed/")
+            url=url.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/")
+            cleaned_data['url'] = url
             return cleaned_data
 
     class Meta:
@@ -80,12 +91,14 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+#working
 class UserProfileForm(forms.ModelForm):
-    picture = forms.ImageField(required=True, label="")
+    picture = forms.ImageField(required=False, label="")
 
     class Meta:
         model = UserProfile
-        fields = ('picture',)
+        exclude = ('user',)
+
 
 class ProfileForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

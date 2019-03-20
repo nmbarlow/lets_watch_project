@@ -4,67 +4,73 @@
 {% block title_block %}
 User profile
 {% endblock %}
+{% block headblock %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+
+<script type="text/javascript"> 
+	jQuery.noConflict();    
+	formdata = new FormData();      
+	jQuery("#image_to_upload").on("change", function() {
+		var file = this.files[0];
+		if (formdata) {
+			formdata.append("image", file);
+			jQuery.ajax({
+				url: "{% url 'profile' user.username %}",
+				type: "POST",
+				data: formdata,
+				processData: false,
+				contentType: false,
+				success:function(){}
+			});
+		}    
+	}); 
+</script> 
+{% endblock %}
 
 {% block body_block %}
-<h1>User profile</h1>
-<h1>{{user.username}}</h1>
-{% if user.is_authenticated %}
+<div class="text-center center">
 
-<div class="container">
+	{% if user.is_authenticated %}
 
-	<div class="row">
+	<div class="container">
 
-		<div class="col-sm-offset-3 col-sm-7" >
+		<div class="row  border border-dark user-details rounded">
+			<div class="col-sm col-md user-details">
 
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-12 col-sm-8">
-							<h2>HELLOOOO</h2>
-							<h1>@{{user.username}}</h1>
-							<p><strong>About:</strong> Web Designer / UI. </p>
-							<p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
-							<p><strong>Skills: </strong>
-								<span class="label label-info tags">html5</span> 
-								<span class="label label-info tags">css3</span>
-								<span class="label label-info tags">jquery</span>
-								<span class="label label-info tags">bootstrap3</span>
-							</p>
-						</div><!--/col-->          
-						<div class="col-xs-12 col-sm-4 text-center">
+				<div class="user-image">
+					<br>
+					<img src="{{MEDIA_URL}}/{{user.userprofile.picture}}" class="center-block img-thumbnail img-responsive border" id="image_to_upload" type="file">				
+					<h2> Hello! @{{user.username}}</h2>
 
-							<img src="{{MEDIA_URL}}/user.jpg" alt="" class="center-block img-thumbnail img-responsive border">
+					<div class="border description">
+						this is the description
+					</div>
 
-
-							<ul class="list-inline ratings text-center" title="Ratings">
-								<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
-								<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
-								<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
-								<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
-								<li><a href="#"><span class="fa fa-star fa-lg"></span></a></li>
-							</ul>
-						</div><!--/col-->
-
-						<div class="col-xs-12 col-sm-4">
-							
-							 <form id="profile_form" action="{% url 'profile' user.username%}" enctype="multipart/form-data" method="post" name="upload">
-								{%csrf_token%}
-								{{userprofile.as_p}}
-								<button class="btn btn-block send-button tx-tfm" type="submit" value="Register" name="submit"><span class="fa fa-plus-circle"></span> Upload </button>
-								
-								</form> 
-
-								</div><!--/col-->
-								
-							</div><!--/row-->
-						</div><!--/panel-body-->
-					</div><!--/panel-->
+					{{userprofile.picture}}
+					<form id="form" action="{% url 'profile' user.username %}" method="post" enctype="multipart/form-data"> 
+						{% csrf_token %}
+						{{form.as_p}}
+ 
+						<input type="submit" value="Submit Comment" /> 
+					</form>
+					<br>
 				</div>
-				UserProfileForm
-				profile_picture
+
 
 			</div>
 		</div>
+
 	</div>
-	{% endif %}
-	{% endblock %}
+</div>
+{% endif %}
+{% endblock %}

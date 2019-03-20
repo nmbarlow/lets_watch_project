@@ -24,8 +24,8 @@ class Movie(models.Model):
 
     genre = models.ForeignKey(Genre)
     title = models.CharField(max_length=128)
-    url = models.URLField()
-    year = models.CharField(max_length=4)
+    url=models.CharField(max_length=200)
+    year = models.CharField(max_length=4,blank=True)
     views = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='movies2/', blank=False)
     thumb=models.ImageField(upload_to='movies2/',blank=False)
@@ -40,15 +40,15 @@ class Movie(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	picture = models.ImageField(upload_to='profile_images', blank=False, default='profile_images/default.png')
-
+	picture = models.ImageField(upload_to='profile_images/', blank=True)
+    #add default if it works
 	def __str__(self):
 		return self.user.username
 
 class VideoPost(models.Model):
 
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    text = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
