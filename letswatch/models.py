@@ -24,11 +24,12 @@ class Movie(models.Model):
 
     genre = models.ForeignKey(Genre)
     title = models.CharField(max_length=128)
-    url=models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
     year = models.CharField(max_length=4,blank=True)
+    description = models.CharField(max_length=350)
     views = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='movies2/', blank=False)
-    thumb=models.ImageField(upload_to='movies2/',blank=False)
+    thumb = models.ImageField(upload_to='movies2/',blank=False)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -39,6 +40,7 @@ class Movie(models.Model):
         return self.title
 
 class UserProfile(models.Model):
+
 	user = models.OneToOneField(User)
 	picture = models.ImageField(upload_to='profile_images/', blank=True)
     #add default if it works
@@ -78,5 +80,6 @@ class Review(models.Model):#(comments)
         return self.user.user.username + ": " + self.movie.name
 
 class Hotel(models.Model):
+
     name = models.CharField(max_length=50)
     hotel_Main_Img = models.ImageField(upload_to='images/')

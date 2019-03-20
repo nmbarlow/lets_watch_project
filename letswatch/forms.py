@@ -23,7 +23,7 @@ class MovieForm(forms.ModelForm):
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     year = forms.CharField(max_length=4, required=False,widget=forms.TextInput(
         attrs={'class':'form-control my-input','placeholder':'Enter the Year of the Movie',}),label="")
-   
+    description = forms.TextInput()
     picture=forms.ImageField(required=False,widget=forms.FileInput(
         attrs={'class':'form-control my-input',}),label="Please Select the movie poster", )
     thumb=forms.ImageField(required=False, widget=forms.FileInput(
