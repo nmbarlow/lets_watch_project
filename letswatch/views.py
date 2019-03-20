@@ -218,7 +218,7 @@ def watchlist(request):
     user_watch_list = []
 
     for wl in watch_list:
-        if wl.user.user.username == request.user.username:
+        if wl.user.user.username == request.user.username and wl.is_deleted == False:
             user_watch_list.append(wl)
 
 

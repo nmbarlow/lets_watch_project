@@ -43,6 +43,7 @@ class WatchList(models.Model):
     user = models.ForeignKey(User)
     movie = models.ForeignKey(Movie)
     time_stamp = models.DateTimeField(auto_now_add=True) #will automatically populate this with current time
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('user', 'movie')
@@ -50,6 +51,16 @@ class WatchList(models.Model):
 
     def __str__(self):
         return self.user.user.username + ": " + self.movie.title
+
+class MovieViews(models.Model):
+    movie = models.ForeignKey(Movie)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('movie', 'time_stamp')
+
+    def __str__(self):
+        return self.movie.title + ": views"
 
 class UserProfile(models.Model):
 
