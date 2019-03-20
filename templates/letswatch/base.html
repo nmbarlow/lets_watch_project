@@ -95,6 +95,7 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'watchlist' %}">My Watch List</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Sign In</a></li>
                     <li><a href="{% url 'register' %}">Sign Up</a></li>
@@ -105,6 +106,7 @@
 
 
             </ul>
+            <li><a href="{% url 'trending' %}">Trending</a></li>
         </div>
 <h1>
 {%get_genre_list%}
@@ -115,5 +117,5 @@
     <script>window.jQuery || document.write('<script src="{% static 'css/assets/js/vendor/jquery.min.js'%}"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="{% static 'css/dist/js/bootstrap.min.js' %}"></script>
-  
+
 </html>

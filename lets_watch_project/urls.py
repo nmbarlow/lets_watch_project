@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^movie/(?P<movie_name_slug>[\w\-]+)/rate/$', views.rate_movie, name='rate_movie'),
     url(r'^movie/(?P<movie_name_slug>[\w\-]+)/review/$', views.add_review, name='add_review'),
+    url(r'^watchlist/$', views.watchlist, name='watchlist'),
+    url(r'^trending/$', views.trending, name='trending'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

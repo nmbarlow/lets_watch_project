@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from letswatch.models import Genre, Movie, Review
+from letswatch.models import Genre, Movie, Review, WatchList
 from letswatch.forms import GenreForm, MovieForm, UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -127,7 +127,7 @@ def add_movie(request, genre_name_slug):
                 movie = form.save(commit=False)
                 movie.genre = genre
                 movie.views = 0
-                
+
                 if 'picture' in request.FILES:
                     movie.picture=request.FILES['picture']
                 if 'thumb' in request.FILES:
@@ -211,6 +211,29 @@ def deactivate_profile(request):
     context_dict = 'Profile successfully deactivated'
 
     return render(request, 'letswatch/deactivate_profile.html', context=context_dict)
+
+def watchlist(request):
+
+    watch_list = WatchList.objects.order_by('-time_stamp')
+    user_watch_list = []
+
+    for wl in watch_list:
+        if wl.user.user.username == request.user.username:
+            user_watch_list.append(wl)
+
+
+
+    context_dict = {'watchlist' : user_watch_list}
+
+    return render(request, 'letswatch/watchlist.html', context=context_dict)
+
+def trending(request):
+
+    new_movies = Movie.objects.order_by('-time_stamp')[:5]
+
+    context_dict = {'newmovies' : new_movies}
+
+    return render(request, 'letswatch/trending.html', context=context_dict)
 
 # def profile(request, username):
 #     try:
@@ -396,21 +419,20 @@ def register_profile(request):
             print(form.errors)
     context_dict={'form':form}
     return render(request,'letswatch/profile_registeration.html',context_dict)
-    
+
 @login_required
-def profile(request, username): 
+def profile(request, username):
     try:
-        user = User.objects.get(username=username) 
+        user = User.objects.get(username=username)
     except User.DoesNotExist:
         return redirect('index')
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
     form = UserProfileForm({'picture': userprofile.picture})
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=userprofile) 
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
         if form.is_valid():
             form.save(commit=True)
-            return redirect('profile', user.username) 
+            return redirect('profile', user.username)
         else:
             print(form.errors)
-    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form}) 
-
+    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form})

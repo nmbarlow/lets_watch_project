@@ -1,0 +1,30 @@
+{% extends 'letswatch/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    WatchList
+{% endblock %}
+
+{% block body_block %}
+    {% if user.is_authenticated %}
+
+        {% if watchlist %}
+            {% for movie in watchlist %}
+            <!-- It shouldn't be the movie's url/trailer but rather a link to the movie page on the site -->
+                <li><a href="{{movie.movie.url}}">{{ movie.movie.title }}, {{ movie.movie.year }}</a></li>
+                <img src="{{ MEDIA_URL }}{{ movie.movie.picture }}" alt="{{movie.movie.title}}" height="250" width="250"/>
+
+                <button id="remove-watchlist-btn">Remove from Watchlist</button> <!-- This still needs to be done - use AJAX -->
+
+                <br><br>
+            {% endfor %}
+        {% else %}
+            <strong>You currently have no movies in your WatchList! Why not click the add button next to a movie you want to see?</strong>
+        {% endif %}
+
+    {% else %}
+        Please sign in or create an account to make your own watchlist!
+    {% endif %}
+
+
+{% endblock %}

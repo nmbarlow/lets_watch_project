@@ -1,0 +1,23 @@
+{% extends 'letswatch/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Trending
+{% endblock %}
+
+{% block body_block %}
+
+    <strong>Newly Added Movies</strong><br><br><br><br>
+
+    {% if newmovies %}
+            {% for movie in newmovies %}
+                <!-- It shouldn't be the movie's url/trailer but rather a link to the movie page on the site -->
+                <a href="{{ movie.url }}"><img src="{{ MEDIA_URL }}{{ movie.picture }}"  height="300" width="300" alt="{{ movie.title }}" /></a>
+                <li>{{ movie.title }}, {{ movie.year }}</li>
+                <br>
+            {% endfor %}
+    {% else %}
+            <strong>There are no newly added movies. Please check back again soon!</strong>
+    {% endif %}
+
+{% endblock %}

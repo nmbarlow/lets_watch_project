@@ -21,7 +21,7 @@ class Genre(models.Model):
         return self.name
 
 class Movie(models.Model):
-
+    time_stamp = models.DateTimeField(auto_now_add=True) #will automatically populate this with current time
     genre = models.ForeignKey(Genre)
     title = models.CharField(max_length=128)
     url = models.CharField(max_length=200)
@@ -38,6 +38,18 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+class WatchList(models.Model):
+    user = models.ForeignKey(User)
+    movie = models.ForeignKey(Movie)
+    time_stamp = models.DateTimeField(auto_now_add=True) #will automatically populate this with current time
+
+    class Meta:
+        unique_together = ('user', 'movie')
+
+
+    def __str__(self):
+        return self.user.user.username + ": " + self.movie.title
 
 class UserProfile(models.Model):
 
