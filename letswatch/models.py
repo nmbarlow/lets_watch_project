@@ -26,7 +26,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=128)
     url = models.CharField(max_length=200)
     year = models.CharField(max_length=4,blank=True)
-    description = models.CharField(max_length=350)
+    description = models.CharField(max_length=600)
     views = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='movies2/', blank=False)
     thumb = models.ImageField(upload_to='movies2/',blank=False)
