@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from letswatch.models import Genre, Movie, Review
@@ -341,13 +341,13 @@ def search(request):
 
             results = Movie.objects.filter(lookups).distinct()
 
-            context={'results': results,
+            context ={'results': results,
                      'submitbutton': submitbutton}
 
-            return render(request, 'search/search.html', context)
+            return render(request, 'letswatch/search.html', context)
 
         else:
-            return render(request, 'search/search.html')
+            return render(request, 'letswatch/search.html')
 
     else:
-        return render(request, 'search/search.html')
+        return render(request, 'letswatch/search.html')
