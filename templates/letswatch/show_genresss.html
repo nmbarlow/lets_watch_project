@@ -1,7 +1,16 @@
-<div class="dropdown-menu" aria-labelledby="dropdown01">
+
+{% if gens %}
 {% for gen in gens %}
-	<a class="dropdown-item" href="{% url 'show_genre' gen.slug %}">{{gen.name}}</a>
+<ul class="dropdown-menu">
+        <li><a href="{% url 'show_genre' gen.slug %}">{{gen.name}}</a></li>
+        <li><a href="{% url 'add_genre' %}">Add a new Genre</a></li>
+{%endfor %}        
+</ul>
 
-{%endfor %}
-</div>
+{% else %}
 
+<ul class="dropdown-menu">
+        <li><a href="{% url 'add_genre' %}">Add a new Genre</a></li>
+       
+</ul>
+{% endif%}
