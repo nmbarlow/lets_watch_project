@@ -1,7 +1,8 @@
 
 {% if gens %}
-{% for gen in gens %}
 <ul class="dropdown-menu">
+{% for gen in gens %}
+
         <li><a href="{% url 'show_genre' gen.slug %}">{{gen.name}}</a></li>
         <li><a href="{% url 'add_genre' %}">Add a new Genre</a></li>
 {%endfor %}        
