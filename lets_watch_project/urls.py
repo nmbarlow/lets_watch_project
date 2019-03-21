@@ -29,8 +29,7 @@ urlpatterns = [
     url(r'^movie/(?P<movie_name_slug>[\w\-]+)/review/$', views.add_review, name='add_review'),
     url(r'^watchlist/$', views.watchlist, name='watchlist'),
     url(r'^trending/$', views.trending, name='trending'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
