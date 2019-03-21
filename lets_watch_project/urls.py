@@ -30,3 +30,7 @@ urlpatterns = [
     url(r'^watchlist/$', views.watchlist, name='watchlist'),
     url(r'^trending/$', views.trending, name='trending'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

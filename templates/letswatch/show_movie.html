@@ -1,29 +1,118 @@
 {% extends 'letswatch/base.html' %}
 {% load staticfiles %}
 {% block headblock %}
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/gallery.css' %}">
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
 <!-- Custom styles for this template -->
-<!--<link href="{% static 'css/carousel.css'%}" rel="stylesheet">--!>
+
 <!------ Include the above in your HEAD tag ---------->
 <style>
-	.bd-placeholder-img {
-		font-size: 1.125rem;
-		text-anchor: middle;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
+	#poster_div{
+		width: 30%;
+
+		height: : auto;
+
+	}
+	#movie_div{
+
+
 	}
 
-	@media (min-width: 768px) {
-		.bd-placeholder-img-lg {
-			font-size: 3.5rem;
-		}
-	}
 </style>
+
+<script type="text/javascript">
+	//$(document).ready(function() {
+		//$("#test").submit(function(event){
+	//		event.preventDefault();
+	$(document).ready( function() {
+
+	$.get('{% url 'list_reviews'  movie.slug %}',
+		{csrfmiddlewaretoken: '{{ csrf_token }}'}, function(data){ $('#list_comments').html(data);
+			
+			});
+		//onload="myFunction()"
+
+// 		$.ajax({
+// 			url: '{% url 'list_reviews'  movie.slug %} ',
+// 			type: "POST",
+// 			dataType: "json",
+// 			data: {
+// 				csrfmiddlewaretoken: '{{ csrf_token }}',
+// 			},
+
+// 			success: function (data) {
+// // 				$.get('/rango/add/',
+// // {category_id: catid, url: url, title: title}, function(data){ $('#pages').html(data);
+// // me.hide();
+// // });
+// 				document.getElementById('list_comments').innerHTML=data;
+
+// 				document.getElementById('list_comments').innerHTML="hellooooo"
+
+// 			} ,
+
+// 		})
+		// .done(function (response) {
+		// 		document.getElementById('list_comments').innerHTML=response;
+
+		// 	}   
+		// 	)
+		
+		
+		// $.ajax({
+  //          url: '{% url 'list_reviews'  movie.slug %} ',
+  //          type: "GET",
+  //          dataType: "json",
+  //          data: {
+  //                   comment: "test"
+  //                   },
+  //           })
+		// .always(function () {
+  //              $.ajax({
+  //               url: '{% url 'list_reviews'  movie.slug %} ' ,
+  //               type: "GET"}).done(function (response) {
+  //                   document.getElementById('list_comments').innerHTML=response
+  //                 })
+  //        });
+
+
+  $('.rango').click(function(){
+  	var that = $(this);
+
+
+  	$.ajax({
+  		type: "POST",
+  		url: "{% url 'ajax_reviews' movie.slug %}",
+  		dataType:'json',
+  		data: {
+  			content:$('#content').val(),
+					//rating:$('input[name=rating]').val(),
+					rating:$('input[name=rating]').val(),
+					
+					movie:$('input[name=movie]').val(),
+					username:$('input[name=username]').val(),
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+				}, //close data
+			}) //close ajax
+
+
+
+
+
+		}); //close button
+
+
+  console.log("success!");
+  return false;   
+});
+
+</script>	
+
+
 {% endblock %}
 {% block title_block %}
 {{genre.name}}
@@ -32,87 +121,77 @@
 
 
 <div class="container">
-	<div class="header-title">
-
-
-		<h1 class="wv-heading--title">
-			
-		</h1>
-
-	</div>
-	
 	<div class="row">
-		{%if movie%}
-		<div class="col-lg-4 text-center">
-
-						
+		<div class="col-md-6 mx-auto text-center">
+			<div class="header-title">
+				{%if movie%}
 				<title>{{ movie.title }}</title>
 
-				 <iframe width="420" height="315"
-			src="{{movie.url}}">
-			</iframe> 
-			</div><!-- /.col-lg-4 -->
-
-			<iframe width="560" height="315" src="{{movie.url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-			{%endif%}
-			<div class="col-lg-4">
-				<title>Placeholder</title>
-				<h2>{{movie.title}}</h2>
-				https://{{movie.url}}
-				<a href="{{movie.url}}">{{movie.url}}</a>
-				<image width="70%" height="70%" xlink:href="{{MEDIA_URL}}/{{movie.thumb}}" clip-path="url(#myCircle)" />
-				<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-			</div><!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-				<h2>Heading</h2>
-				<p>
-					<iframe width="560" height="315" src="https://{{movie.url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-					<iframe width="560" height="315" src="https://{{movie.url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-					<img href="https://gemfury.com/help/url-string-over-https/">test hhhhh</a>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-				<p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-			</div><!-- /.col-lg-4 -->
-		</div><!-- /.row -->
-
-		<div class="row">
-			{%if movie%}
-		
-
-			<div class="col-lg-4">
-		
-
-				
-</div>	
-					<div class = "caption">
-						<h4>{{movie.title}}</h4>
-						<p>{{movie.views}}</p>
-
-						<p>
-							<a href = "https://{{movie.url}}" class = "btn btn-primary my-input" role = "button">
-								Button
-							</a> 
-
-							<a href = "#" class = "btn btn-default my-input" role = "button">
-								Button
-							</a>
-						</p>
-					</div>
+				<h3>{{movie.title}} - {{movie.year}}</h3>
+				<h2>Views : {{movie.views}}</h2>
+				<div >
+					<image id="poster_div" src="{{MEDIA_URL}}/{{movie.thumb}}" ></image>
 				</div>
-			</div>
 
-			
-			{% else %}
-			<h1 class="title">No movies currently in genre!</h1>
-			{%endif%}
-			{% if user.is_authenticated %}
-			
-			{%endif%}
+				<br>
+				<h2>Trailer</h2>
+				<iframe class="movie_div" height="40%"width="auto" src="{{movie.url}}">
+				</iframe> 
+				
+				<hr class="hr-or">
+
+
+			</div>
 		</div>
 	</div>
+	<div id="comment_div" class="row">
+		
+		<div class="col-md-6 mx-auto text-center">
+			<input type="hidden" name="username" value="{{user.username}}">
+
+			<input type="hidden" name="movie" value="{{movie.slug}}">
+			<input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
+			
+			<h2> Previous Comments</h2>
+			<div id="list_comments">
+				here?
+			</div>
+			<h4>Write your comment</h4>
+			<textarea class="form-control" id="content" rows="4"></textarea>
+			<br>
+			<hr class="hr-or">
+			<label class="radio-inline"><input type="radio" name="rating" value="1" checked>1</label>
+			<label class="radio-inline" ><input type="radio" name="rating" value="2">2</label>
+			<label class="radio-inline"><input type="radio" name="rating" value="3">3</label> 
+			<label class="radio-inline" ><input type="radio" name="rating" value="4">4</label>
+			<label class="radio-inline"><input type="radio" name="rating" value="5">5</label> 
+			<hr class="hr-or">
+			<br>
+
+			<button id="rango" class="rango btn btn-primary mb-2 send-button" >Add Review</button>
+
+
+		</div>
+
+	</div>
+
+
+
 </div>
+
+</div>
+
+
+</div>
+</div>
+
+
+{% else %}
+<h1 class="title">No movies currently in genre!</h1>
+{%endif%}
+{% if user.is_authenticated %}
+
+{%endif%}
 </div>
 
 {%endblock%}

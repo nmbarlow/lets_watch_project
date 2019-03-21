@@ -10,10 +10,19 @@ from letswatch.models import UserProfile
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.http import JsonResponse
+import json
+from letswatch.models import Hotel,Review
+from letswatch.forms import HotelForm,ReviewForm
+from .mixins import AjaxFormMixin
+from django.views.generic.edit import CreateView
+from django.views.generic import View
 
-from letswatch.models import Hotel
-from letswatch.forms import HotelForm
-
+from django import forms
+from django.utils.decorators import method_decorator
+from django.forms.models import model_to_dict
+from django.http import HttpResponseNotAllowed
+from django.utils import timezone
 @login_required
 def home(request):
     return render(request, 'letswatch/home.html')
@@ -368,6 +377,23 @@ def search(request):
 def about(request):
     return HttpResponse("About us page")
 
+def ajax_reviews(request,movie_title_slug):
+    form=ReviewForm()
+    if request.method == 'POST':
+        content=request.POST['content']
+        movie_slug=request.POST['movie']
+        rating=request.POST['rating']
+        print(content)
+        movie=Movie.objects.get(slug=movie_slug)
+        user=username=request.POST["username"]
+        p=Review.objects.create(content=content,movie=movie,user=user,rating=rating,created=timezone.now())
+
+       # review.save()
+        p.save()
+        return HttpResponse("horaaaay")
+    else:
+        return HttpResponse("error")
+   
 
 @login_required
 def my_reviews(request, username):
@@ -381,18 +407,65 @@ def my_reviews(request, username):
 
     return render(request, 'letswatch/my_reviews.html', context)
 
+
+
+@login_required
+def list_reviews(request,movie_title_slug):
+    print("here")
+    reviews = Review.objects.filter(movie__slug__iexact=movie_title_slug)  # Getting all the posts from database
+    print(reviews)
+    # return HttpResponse({ 'reviews': reviews })
+    return render(request, 'letswatch/comment_list.html', { 'reviews': reviews })
+
+
 # Create your views here.
 def hotel_image_view(request):
 
+    if request.method =='GET':
+        comment=request.GET['comment']
+      
+            
     if request.method == 'POST':
         form = HotelForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
             return redirect('success')
+
+    # elif request.method=='GET':
+    #     name = request.GET.get('name', None)
+    #     data = {
+    #     'is_taken': Hotel.objects.filter(name__iexact=name).exists()
+    #     }
+    #     return JsonResponse(data)
     else:
         form = HotelForm()
     return render(request, 'letswatch/list.html', {'form' : form})
+
+
+# class hotelView(CreateView):
+#     form_class = HotelForm
+#     template_name  = 'letswatch/list.html'
+    
+    # test = request.POST.get("test","")
+
+    # response_data={}
+    # try:
+    #     response_data['result']="success write"
+    #     response_data['message']=test
+    # except:
+    #     response_data['result']="failed"
+    #     response_data['message']='the sub modie'
+    # return HttpResponse(json.dumps(response_data),content_type="application/json")
+    # # if request.method == 'POST':
+    #     form = HotelForm(request.POST, request.FILES)
+
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('success')
+    # else:
+    #     form = HotelForm()
+    # return render(request, 'letswatch/list.html', {'form' : form})
 
 
 def success(request):
@@ -453,4 +526,5 @@ def profile(request, username):
             return redirect('profile', user.username)
         else:
             print(form.errors)
-    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form}) 

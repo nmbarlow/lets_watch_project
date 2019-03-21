@@ -1,15 +1,40 @@
 
 <!DOCTYPE html> 
 <html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <title>Hotel_image</title> 
-</head> 
-<body> 
-    <form method = "post" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        {{ form.as_p }} 
-        <button type="submit">Upload</button> 
-    </form> 
-</body> 
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script>
+  	$(document).ready(function(){
+    $("#about").click(function (event) {
+    	
+    	var hotelid= $(this).attr("")
+      // var name = $(this).val();
+
+      // $.ajax({
+      //   url: '{% url "image_upload" %}',
+      //   data: {
+
+      //     'name': name
+      //   },
+      //   dataType: 'json',
+      //   success: function (data) {
+      //     if (data.is_taken) {
+      //       alert("A user with this username already exists.");
+      //     }
+      //   }
+      // });
+
+    });
+});
+  </script>
+</head>
+<body>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="button" id="about" >Sign up</button>
+  </form>
+
+</body>
+
 </html> 

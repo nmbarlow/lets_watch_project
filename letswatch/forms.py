@@ -116,10 +116,17 @@ class HotelForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 
-    # date = forms.DateField(widget=forms.HiddenInput(), initial = datetime,required=False)
+    date = forms.DateField(widget=forms.HiddenInput(),required=False)
     rating = forms.IntegerField(widget=forms.HiddenInput(), initial =0)
-    content = forms.TextInput()
+    content = forms.TextInput(
+        attrs=
+        {'name':'content',
+    
+        })
 
     class Meta:
         model = Review
         fields = ['date','rating', 'content',]
+
+    
+

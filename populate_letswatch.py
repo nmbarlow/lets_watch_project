@@ -183,15 +183,15 @@ def add_gen(name,):
     g.save()
     return g
 
-def add_review(movie):
-    r = Review.objects.create(
-                user=user,
-                movie=movie,
-                date=data['date'],
-                rating=data['rating'],
-                content=data['content'],)
-    r.save()
-    return r
+# def add_review(movie):
+#     r = Review.objects.create(
+#                 user=user,
+#                 movie=movie,
+#                 date=data['date'],
+#                 rating=data['rating'],
+#                 content=data['content'],)
+#     r.save()
+#     return r
 
 # Execution will start here as the others are 'methods' and therefore will not run
 # unless they are called specifically.

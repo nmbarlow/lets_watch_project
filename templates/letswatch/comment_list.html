@@ -1,0 +1,24 @@
+<div>
+
+{% for review in reviews %}
+<div style="background-color: #f4f6f9;">
+  <h4>
+<a href="{% url 'profile' review.user %}">
+ {{review.user}} 
+</a>
+{{review.rating}}
+</h4>
+posted on: 
+{{review.created}}
+
+<div class="border" >
+  <strong>
+ {{review.content}}
+</strong>
+</div>
+</div>
+
+
+
+{%endfor%}
+</div>

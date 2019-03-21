@@ -86,23 +86,49 @@ class VideoPost(models.Model):
 
 class Review(models.Model):#(comments)
 
-    date = models.DateField(blank=True, null=True)
+    created = models.DateTimeField(editable=False,blank=True)
     rating = models.PositiveSmallIntegerField(blank=True, null=True)
     content = models.TextField(blank=True)
-    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='reviews')
+    #ser = models.ForeignKey('User', on_delete=models.CASCADE, related_name='reviews')
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='reviews')
-
-    class Meta:
+    user=models.TextField(blank=True)
+    # class Meta:
         # user and the movie as primary key
-        unique_together = ('user', 'movie',)
+        #unique_together = ('user', 'movie','date')
+    #custom created date field 
+    # def save(self, *args, **kwargs):
+    #     ''' On save, update timestamps '''
+    #     if not self.id:
+    #         self.created = timezone.now()
+        
+    #     return super(Review, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.user.user.username + ": " + self.movie.title
+        return self.user + ": " + self.movie.title
 
     def __unicode__(self):
-        return self.user.user.username + ": " + self.movie.name
+        return self.user + ": " + self.movie.name
 
 class Hotel(models.Model):
 
     name = models.CharField(max_length=50)
     hotel_Main_Img = models.ImageField(upload_to='images/')
+
+
+# class Review(models.Model):#(comments)
+
+#     date = models.DateField(blank=True, null=True)
+#     rating = models.PositiveSmallIntegerField(blank=True, null=True)
+#     content = models.TextField(blank=True)
+#     user = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='reviews')
+#     movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='reviews')
+
+#     class Meta:
+#         # user and the movie as primary key
+#         unique_together = ('user', 'movie',)
+
+#     def __str__(self):
+#         return self.user.user.username + ": " + self.movie.title
+
+#     def __unicode__(self):
+#         return self.user.user.username + ": " + self.movie.name

@@ -9,10 +9,15 @@ class MovieAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('name',)}
 
+class ReviewAdmin(admin.ModelAdmin):
+    readonly_fields = ('created',)
+
+
 # customised interface
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(UserProfile)
 admin.site.register(VideoPost)
-admin.site.register(Review)
 admin.site.register(WatchList)
+
+admin.site.register(Review,ReviewAdmin)
