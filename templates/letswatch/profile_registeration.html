@@ -1,10 +1,7 @@
 	{% extends 'letswatch/base.html' %}
 	{% load staticfiles %}
 	{% block headblock %}
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!------ Include the above in your HEAD tag ---------->
+	
 
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
@@ -27,16 +24,17 @@
 					<h1>Profile</h1>
 					<h1 id="link">@{{selecteduser.username}} </h1>
 					
-					<div>
+					<div class="text-center">
 						<br>
 
 						<hr class="hr-or">
 						<br>
 						{% if selecteduser.username == user.username %}
+
 						<form method="post" action="." enctype="multipart/form-data">
 							{% csrf_token %}
 							{{ form.as_p }}
-							<input type="submit" value="Update"  class="send-button" />
+							<input type="submit" value="Update"  class="btn send-button" />
 						</form> {% else %}
 					{% endif %} </div>
 					<div id="edit_profile"></div>

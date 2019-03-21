@@ -4,18 +4,27 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 
-
+<style type="text/css">
+ .bt1 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+</style>
 <!------ Include the above in your HEAD tag ---------->
 {% endblock %}
 
 {% block body_block %}
 <h1 class="text-center"> {{genre.name}}</h1>
-		{% if user.is_authenticated %}
-			<h2 class="text-center">
 
-			<a href="{% url 'add_movie' genre.slug %}">Add a movie</a>
-			{%endif%}
-			</h2>
+		{% if user.is_authenticated %}
+			
+
+<h1 class="text-center">
+<a class="button " href="{% url 'add_movie' genre.slug %}"><input  type="button" class="btn" value="Add a movie"></a>
+	</h1>		
+	
 	<div class="container-fluid">
 		<div class="row">
 	{%if movies%}
@@ -42,11 +51,18 @@
 			{%endif%}
 	
 		</div>
-	</div>
+		{%else %}
+		 <h1 class="title">You must be logged in to see genres</h1>
+		
+			{%endif%}
+
+		
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script> -->
 	<script > $(document).ready(function(){
     $(".fancybox").fancybox({
         openEffect: "none",

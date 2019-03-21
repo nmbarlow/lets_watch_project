@@ -4,20 +4,65 @@
 {% block title_block %}
     Trending
 {% endblock %}
+{% block headblock%}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 
+{% endblock %}
 {% block body_block %}
 
-    <strong>Newly Added Movies</strong><br><br><br><br>
 
-    {% if newmovies %}
+
+
+<!-- replace -->
+
+
+<h1 class="text-center">
+    Newly Added Movies
+    </h1>       
+    
+    <div class="container-fluid">
+        <div class="row">
+    {%if newmovies%}
             {% for movie in newmovies %}
-                <!-- It shouldn't be the movie's url/trailer but rather a link to the movie page on the site -->
-                <a href="{{ movie.url }}"><img src="{{ MEDIA_URL }}{{ movie.thumb }}"  height="300" width="300" alt="{{ movie.title }}" /></a>
-                <li>{{ movie.title }}</li>
-                <br>
-            {% endfor %}
-    {% else %}
-            <strong>There are no newly added movies. Please check back again soon!</strong>
-    {% endif %}
+            
+                    <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
+                            <img src="{{MEDIA_URL}}/{{movie.thumb}}" class="img-thumbnail" alt="" />
+                            <div class="portfolio_images_overlay text-center ">
+                                <h6 class="clrd-font">{{movie.title}}</h6>
+                                <p class="clrd-font product_price"> <i class="fa clrd-font" aria-hidden="true"></i> {{movie.views}}</p>
+                                <a href="{% url 'show_movie' movie.slug %}" class="btn btn-primary">See more</a>
+                                
+                            </div>
+                            <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/PUeaHfC.png">
+                                
+                            </a>
+                    </div>
+                    
+                    {%endfor%}
 
+                    
+                {% else %}
+            <h1 class="title">There are no newly added movies. Please check back again soon!</h1>
+            {%endif%}
+    
+        </div>
+        
+        
+         
+
+        </div>
+    </div>
+    
+    
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script> -->
+    <script > $(document).ready(function(){
+    $(".fancybox").fancybox({
+        openEffect: "none",
+        closeEffect: "none"
+    });
+});
+</script>
 {% endblock %}

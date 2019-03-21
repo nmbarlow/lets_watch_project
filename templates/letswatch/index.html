@@ -7,10 +7,14 @@
 {%block headblock %}
 <style type="text/css">
 
-.h1{
-	font-family:Gadget;
+h1{
+	font-family:Helvetica;
 	text-transform:uppercase;
+    color: #FFF;
+    display: inline;
+    margin-top: 5%;
 }
+
 .img{
 
 width: 100%;
@@ -24,28 +28,40 @@ height: auto;
 	text-transform:uppercase;
 }
 
+body, html {
+  height: 100%;
+  margin: 0;
+    background-image: url("{{MEDIA_URL}}/th2.jpg");
+    background-size:100%;
+    background-repeat: no-repeat;
+}
+
+h2{
+   margin-left: 1%;
+   margin-top: 5%;
+    color: #fbfaf2;
+    display:inline;
+}
+
 </style>
 
 {% endblock %}
 {% block body_block %}
 
 	<!-- <img src="{{MEDIA_URL}}th.jpg" style="width:100%;"> -->
-    <h1>Let's Watch!</h1>
-
-    <div class="text-center">
-        {% if user.is_authenticated %}
+    <strong><h1>Let's Watch!</h1></strong>
+    {% if user.is_authenticated %}
             <h1>Hello {{user.username}}!</h1>
         {% else %}
-            Hello!
+          <h2 > Hellooo!</h2>
+          <h2>we'd love it if you join us!, <a href="{% url 'register' %}">Sign up</a> or <a href="{% url 'login' %}">Sign in</a></h2>
         {% endif %}
-          <img class="img" src="{{MEDIA_URL}}/th2.jpg">
+<div class="container">
+      
 
-    </div>
 
-
-			<div class="bodyhome">
+</div>
 			
-			</div>
 
         <br />
 
