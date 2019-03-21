@@ -4,16 +4,49 @@
 {% block title_block %}
     Let's Watch!
 {% endblock %}
+{%block headblock %}
+<style type="text/css">
 
+.h1{
+	font-family:Gadget;
+	text-transform:uppercase;
+}
+.img{
+
+width: 100%;
+height: auto;
+
+}
+.body.home div:first-child div div span a {
+	color:#f43636;
+	font-family:Arial Black, Helvetica, sans-serif;
+	font-size:12px;
+	text-transform:uppercase;
+}
+
+</style>
+
+{% endblock %}
 {% block body_block %}
+
+	<!-- <img src="{{MEDIA_URL}}th.jpg" style="width:100%;"> -->
     <h1>Let's Watch!</h1>
 
-    <div>
+    <div class="text-center">
         {% if user.is_authenticated %}
-            Hello {{user.username}}!
+            <h1>Hello {{user.username}}!</h1>
         {% else %}
             Hello!
         {% endif %}
+          <img class="img" src="{{MEDIA_URL}}/th2.jpg">
+
+    </div>
+
+
+			<div class="bodyhome">
+			
+			</div>
+
         <br />
 
 {% endblock %}

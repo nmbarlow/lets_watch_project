@@ -1,0 +1,7 @@
+<div class="dropdown-menu" aria-labelledby="dropdown01">
+{% for gen in gens %}
+	<a class="dropdown-item" href="{% url 'show_genre' gen.slug %}">{{gen.name}}</a>
+
+{%endfor %}
+</div>
+
