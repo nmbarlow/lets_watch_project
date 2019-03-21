@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'letswatch',
-    # 'social_django',
+    'social_django',
     # 'search',
 ]
 
@@ -53,7 +53,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'social_django.middleware.SocialAuthExceptionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'lets_watch_project.urls'
@@ -71,8 +71,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
 
-                # 'social_django.context_processors.backends',
-                # 'social_django.context_processors.login_redirect',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -110,14 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTHENTICATION_BACKENDS = (
-#     # 'social_core.backends.google.GoogleOpenId',  # for Google authentication
-#     # 'social_core.backends.google.GoogleOAuth2'  # for Google authentication
-#     'social_core.backends.twitter.TwitterOAuth',    # for Twitter authentication
-#     'social_core.backends.facebook.FacebookOAuth2', # for Facebook authentication
-#
-#     'django.contrib.auth.backends.ModelBackend',
-# )
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    # 'social_core.backends.google.GoogleOAuth2'  # for Google authentication
+    'social_core.backends.twitter.TwitterOAuth',    # for Twitter authentication
+    'social_core.backends.facebook.FacebookOAuth2', # for Facebook authentication
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -145,30 +145,30 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
 
-# SOCIAL_AUTH_PIPELINE = (
-#     'social_core.pipeline.social_auth.social_details',
-#     'social_core.pipeline.social_auth.social_uid',
-#     'social_core.pipeline.social_auth.auth_allowed',
-#     'social_core.pipeline.social_auth.social_user',
-#     'social_core.pipeline.user.get_username',
-#     'social_core.pipeline.user.create_user',
-#     'letswatch.pipeline.user.create_user',
-#     'social_core.pipeline.social_auth.associate_user',
-#     'social_core.pipeline.social_auth.load_extra_data',
-#     'social_core.pipeline.user.user_details',
-# )
-#
-# #twitter keys
-# SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
-# SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
-#
-# #facebook keys
-# SOCIAL_AUTH_FACEBOOK_KEY = '850859908595144'  # App ID
-# SOCIAL_AUTH_FACEBOOK_SECRET = '76c3662e91c0215333671f4180e090a6'  # App Secret
-#
-# #google keys
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '359764519634-8b9apv4q76atui8lresisje3kbbi8p3c.apps.googleusercontent.com' #'AIzaSyB9Fn6ws_C1eAjmx9Hmxd3RlcobnSHkyr4'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '__5dhf2KtxhTgG5692_sHo39'
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'letswatch.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+#twitter keys
+SOCIAL_AUTH_TWITTER_KEY = 'utEdYgQ1BshKe73mp82VPmorm'
+SOCIAL_AUTH_TWITTER_SECRET = 'NrcAHdEFg75KlSDoN8dDO4hehk1297Jmkv61K3c2KtVuvyau6q'
+
+#facebook keys
+SOCIAL_AUTH_FACEBOOK_KEY = '850859908595144'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '76c3662e91c0215333671f4180e090a6'  # App Secret
+
+#google keys
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '359764519634-8b9apv4q76atui8lresisje3kbbi8p3c.apps.googleusercontent.com' #'AIzaSyB9Fn6ws_C1eAjmx9Hmxd3RlcobnSHkyr4'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '__5dhf2KtxhTgG5692_sHo39'
 
 # # im not sure if this is working yet!
 # SOCIAL_AUTH_PIPELINE = (
