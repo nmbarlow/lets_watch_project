@@ -11,9 +11,13 @@
 
  <meta charset="UTF-8" />
 
+{% block style %}<!-- 
 
- <link rel="stylesheet" href="{% static 'css/base.css' %}">
+ <link rel="stylesheet" href="{% static 'css/base.css' %}"> -->
+ {% endblock%}
+ <style type="text/css">
 
+ </style>
  {% block headblock%}
  {% endblock %}
 
@@ -27,67 +31,68 @@
 <body>
   <nav class="navbar navbar-inverse">
    <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header fixed-top ">
 
-     <a class="navbar-brand" href="{% url 'index' %}"><!-- <img src="{% static 'logo.png'%}" width="10%" class="logo center" alt="logo here"> -->Let's Watch</a>
+     <a class="navbar-brand " href="{% url 'index' %}"><img src="{% static 'logo.png'%}" width="5%" class="logo center" alt="logo here"> Let's Watch</a>
    </div>
-   <ul class="nav navbar-nav">
+   <ul class="nav navbar-nav navbar-right">
      <li class="active"><a href="{% url 'index' %}">Home</a></li>
 
      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Genre <span class="caret"></span></a>
        {% genre_template %}
 
-    </li>
+     </li>
 
-    <li><a href="{% url 'trending' %}">Trending</a></li>
+     <li><a href="{% url 'trending' %}">Trending</a></li>
 
-    {% if user.is_authenticated %}
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-    <li>
-      <a href="{% url 'profile' user.username %}">Show Profile</a>
-    </li>
+     {% if user.is_authenticated %}
+     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="{% url 'profile' user.username %}">Show Profile</a>
+        </li>
 
-    <li>
-       <a href="{% url 'logout' %}">Logout</a>
-    </li>
-    <li>
+        <li>
+         <a href="{% url 'logout' %}">Logout</a>
+       </li>
+       <li>
         <a href="{% url 'watchlist' %}">Watchlist</a>
-    </li>
+      </li>
     </ul>
   </li>
-{%else %}
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User<span class="caret"></span></a>
+  {%else %}
+  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User<span class="caret"></span></a>
     <ul class="dropdown-menu">
-    <li>
-      <a href="{% url 'login' %}">Sign In</a>
-    </li>
+      <li>
+        <a href="{% url 'login' %}">Sign In</a>
+      </li>
 
-    <li>
+      <li>
        <a href="{% url 'register' %}">Register</a>
-    </li>
-   
-    </ul>
-  </li>
+     </li>
 
-  {%endif%}
+   </ul>
+ </li>
+
+ {%endif%}
 
 
-    <li><a href="{% url 'about' %}">About</a></li>
-    <li><a href="{% url 'search' %}">Search</a></li>
-  </ul>
-
+ <li><a href="{% url 'about' %}">About</a></li>
+ <li><a href="{% url 'search' %}">Search</a></li>
+</ul>
+<!-- 
 </div>
+
+</nav>
+-->
+
+
+
+
 </div>
 </nav>
 
- 
- 
-      
-
-      
-
-
+<!-- 
 <form method="GET" value="{{request.GET.q}}">
   <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search movies"/>
   <input type="submit" name="submit" value="Search"/>
@@ -107,8 +112,7 @@
 No search results for this query
 {% endif %}
 {% endif %}
-</div>
-</nav>
+ -->
 <!-- 
   do not edit the above  -->
   <div class="container" >
