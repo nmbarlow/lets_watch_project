@@ -375,7 +375,7 @@ def search(request):
 
 
 def about(request):
-    return HttpResponse("About us page")
+    return HttpResponse("LET’S WATCH! provides a relaxed, informative, sociable and friendly environment for movie lovers of all kinds!")
 
 def ajax_reviews(request,movie_title_slug):
     form=ReviewForm()
@@ -393,7 +393,7 @@ def ajax_reviews(request,movie_title_slug):
         return HttpResponse("horaaaay")
     else:
         return HttpResponse("error")
-   
+
 
 @login_required
 def my_reviews(request, username):
@@ -423,8 +423,8 @@ def hotel_image_view(request):
 
     if request.method =='GET':
         comment=request.GET['comment']
-      
-            
+
+
     if request.method == 'POST':
         form = HotelForm(request.POST, request.FILES)
 
@@ -446,7 +446,7 @@ def hotel_image_view(request):
 # class hotelView(CreateView):
 #     form_class = HotelForm
 #     template_name  = 'letswatch/list.html'
-    
+
     # test = request.POST.get("test","")
 
     # response_data={}
@@ -527,4 +527,4 @@ def profile(request, username):
         else:
             print(form.errors)
 
-    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form}) 
+    return render(request, 'letswatch/profile_registeration.html',{'userprofile': userprofile, 'selecteduser': user, 'form': form})
