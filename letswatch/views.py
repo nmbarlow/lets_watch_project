@@ -242,7 +242,7 @@ def watchlist(request):
 
 def trending(request):
 
-    new_movies = Movie.objects.order_by('-time_stamp')[:5]
+    new_movies = Movie.objects.order_by('-time_stamp')[:12]
 
     context_dict = {'newmovies' : new_movies}
 
@@ -537,7 +537,7 @@ def profile(request, username):
 @login_required
 def settings(request):
     user = request.user
-    
+
             try:
             facebook_login = user.social_auth.get(provider='facebook')
         except UserSocialAuth.DoesNotExist:
