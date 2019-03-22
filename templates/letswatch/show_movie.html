@@ -32,7 +32,7 @@
 
 	$.get('{% url 'list_reviews'  movie.slug %}',
 		{csrfmiddlewaretoken: '{{ csrf_token }}'}, function(data){ $('#list_comments').html(data);
-			
+
 			});
 		//onload="myFunction()"
 
@@ -59,10 +59,10 @@
 		// .done(function (response) {
 		// 		document.getElementById('list_comments').innerHTML=response;
 
-		// 	}   
+		// 	}
 		// 	)
-		
-		
+
+
 		// $.ajax({
   //          url: '{% url 'list_reviews'  movie.slug %} ',
   //          type: "GET",
@@ -83,7 +83,7 @@
   $('.rango').click(function(){
   	var that = $(this);
 
-  	alert($('input[name=rating]:checked').val());
+  	// alert($('input[name=rating]:checked').val());
 
   	$.ajax({
   		type: "POST",
@@ -93,14 +93,14 @@
   			content:$('#content').val(),
 					//rating:$('input[name=rating]').val(),
 					user_rating:$('input[name=rating]:checked').val(),
-					
+
 					movie:$('input[name=movie]').val(),
 					username:$('input[name=username]').val(),
 					csrfmiddlewaretoken: '{{ csrf_token }}',
 				}, //close data
-			
-		success: function() {   
-        	 $("#list_comments").load(" #list_comments"); 
+
+		success: function() {
+        	 $("#list_comments").load(" #list_comments");
     	},
 
 	}); //close ajax
@@ -112,10 +112,10 @@
 
 
   console.log("success!");
-  return false;   
+  return false;
 });
 
-</script>	
+</script>
 
 
 {% endblock %}
@@ -141,8 +141,8 @@
 				<br>
 				<h2>Trailer</h2>
 				<iframe class="movie_div" height="40%"  width="auto" src="{{movie.url}}">
-				</iframe> 
-				
+				</iframe>
+
 				<p>{{movie.description}}</p>
 				<hr class="hr-or">
 
@@ -151,13 +151,13 @@
 		</div>
 	</div>
 	<div id="comment_div" class="row center1">
-		
+
 		<div class="col-md-6 mx-auto text-center center1">
 			<input type="hidden" name="username" value="{{user.username}}">
 
 			<input type="hidden" name="movie" value="{{movie.slug}}">
 			<input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
-			
+
 			<h2> Previous Comments</h2>
 			<div id="list_comments">
 				<strong>No comments yet</strong>
@@ -168,9 +168,9 @@
 			<hr class="hr-or">
 			<label class="radio-inline"><input type="radio" name="rating" value="1" >1</label>
 			<label class="radio-inline" ><input type="radio" name="rating" value="2">2</label>
-			<label class="radio-inline"><input type="radio" name="rating" value="3">3</label> 
+			<label class="radio-inline"><input type="radio" name="rating" value="3">3</label>
 			<label class="radio-inline" ><input type="radio" name="rating" value="4">4</label>
-			<label class="radio-inline"><input type="radio" name="rating" value="5">5</label> 
+			<label class="radio-inline"><input type="radio" name="rating" value="5">5</label>
 			<hr class="hr-or">
 			<br>
 
