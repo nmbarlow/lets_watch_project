@@ -27,6 +27,8 @@ from django.utils.decorators import method_decorator
 from django.forms.models import model_to_dict
 from django.http import HttpResponseNotAllowed
 from django.utils import timezone
+
+
 @login_required
 def home(request):
     return render(request, 'letswatch/home.html')
@@ -350,7 +352,7 @@ def rate_movie(request, movie_name_slug):
                     movie = Movie.objects.get(slug=movie_name_slug)
                     userprofile = request.user.userprofile
 
-                    review, created = Review.objects.get_or_create(user=userprofile, movie=movie)
+                    review, created = Review.objects.get_or_create(user=userprofile, movie=movie,rating=rating)
 
                     review.rating = user_rating
                     review.save()
@@ -374,9 +376,45 @@ def add_user_ratings_to_movie(user, movie):
         movie.user_rating = 0
 
     return movie
-def search(request):
-    return HttpResponse("Search page")
 
+
+def encode_url(str):
+    return str.replace(' ', '_')
+
+def decode_url(str):
+    return str.replace('_', ' ')
+
+def get_movie_list(max_results=0, starts_with=''):
+    movie_list = []
+    if starts_with:
+        movie_list = Movie.objects.filter(title__startswith=starts_with)
+    else:
+        movie_list = Movie.objects.all()
+
+    if max_results > 0:
+        if (len(movie_list) > max_results):
+            movie_list = movie_list[:max_results]
+
+    for movie in movie_list:
+        movie.url = encode_url(movie.title)
+    
+    return movie_list
+
+def search(request):
+    context_dict = {}
+    if request.method=="POST":
+        x=request.POST['query']
+        movie_list=Movie.objects.filter(title__contains=x)
+   
+        
+        context_dict['result_list'] = movie_list
+
+        result_list = []
+
+
+        # context_dict['result_list'] = result_list
+    return render(request,'letswatch/search_movies.html', context_dict)
+    
 
 def about(request):
     return HttpResponse("LET’S WATCH! provides a relaxed, informative, sociable and friendly environment for movie lovers of all kinds!")
@@ -386,11 +424,11 @@ def ajax_reviews(request,movie_title_slug):
     if request.method == 'POST':
         content=request.POST['content']
         movie_slug=request.POST['movie']
-        rating=request.POST['rating']
-        print(content)
+        user_rating=request.POST['user_rating']
+        print(content,user_rating,movie_slug)
         movie=Movie.objects.get(slug=movie_slug)
-        user=username=request.POST["username"]
-        p=Review.objects.create(content=content,movie=movie,user=user,rating=rating,created=timezone.now())
+        user=request.POST["username"]
+        p=Review.objects.create(content=content,movie=movie,user=user,rating=user_rating,created=timezone.now())
 
        # review.save()
         p.save()
@@ -477,7 +515,7 @@ def success(request):
 
 
 
-def search(request):
+def search1(request):
     if request.method == 'GET':
         query = request.GET.get('q')
 

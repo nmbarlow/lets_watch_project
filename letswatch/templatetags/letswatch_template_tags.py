@@ -17,3 +17,7 @@ def genre_template():
 
 def get_review_list():
     return {'reviews':Review.objects.all()}
+
+
+def search():
+	Movie.objects.filter()

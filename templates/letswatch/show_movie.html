@@ -91,7 +91,7 @@
   		data: {
   			content:$('#content').val(),
 					//rating:$('input[name=rating]').val(),
-					rating:$('input[name=rating]').val(),
+					user_rating:$('input[name=rating]').val(),
 					
 					movie:$('input[name=movie]').val(),
 					username:$('input[name=username]').val(),
@@ -155,13 +155,13 @@
 			
 			<h2> Previous Comments</h2>
 			<div id="list_comments">
-				here?
+				<strong>No comments yet</strong>
 			</div>
 			<h4>Write your comment</h4>
 			<textarea class="form-control" id="content" rows="4"></textarea>
 			<br>
 			<hr class="hr-or">
-			<label class="radio-inline"><input type="radio" name="rating" value="1" checked>1</label>
+			<label class="radio-inline"><input type="radio" name="rating" value="1" >1</label>
 			<label class="radio-inline" ><input type="radio" name="rating" value="2">2</label>
 			<label class="radio-inline"><input type="radio" name="rating" value="3">3</label> 
 			<label class="radio-inline" ><input type="radio" name="rating" value="4">4</label>
