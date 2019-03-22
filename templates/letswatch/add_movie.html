@@ -2,26 +2,32 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Add a movie
+Add a movie
 {% endblock %}
 
-    {% block headblock %}
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
-    {% endblock %}
+{% block headblock %}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<style type="text/css">
+    .center1{
+       float: none;
+       margin: 0 auto;
+   }
+</style>
+{% endblock %}
 {% block body_block %}
 
-    <h1>Add a movie</h1>
-        {% if genre %}
-        <div class="row">
-         <div class="col-md-4 mx-auto">
-            <div class="myform form ">
+<h1>Add a movie</h1>
+{% if genre %}
+<div class="row">
+   <div class="col-md-4 mx-auto center1">
+    <div class="myform form ">
         <div class="text-center ">
             <div class="form-control my-input">
 
                 <form id="movie_form" method="post" action="/letswatch/genre/{{genre.slug}}/add_movie/" enctype="multipart/form-data">
                     {% csrf_token %}
-                   {{form.as_p}}
+                    {{form.as_p}}
                     <input type="submit" name="submit" value="Add movie" class=" btn btn-block send-button tx-tfm"/>
                 </form>
 
@@ -30,8 +36,8 @@
     </div>
 </div>
 </div>
-        {% else %}
-            A genre by this name does not exist.
-        {% endif%}
+{% else %}
+A genre by this name does not exist.
+{% endif%}
 
 {% endblock %}

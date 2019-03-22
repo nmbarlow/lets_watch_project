@@ -16,25 +16,25 @@ def populate():
 
     comedy_movies = [
     {"title" : "The Wolf of Wall Street",
-    "url" : "https://www.youtube.com/watch?v=iszwuX1AK6A",
+    "url" : "https://www.youtube.com/embed/iszwuX1AK6A",
     "year" : "2013",
     "picture" : "movies/the_wolf_of_wall_street.jpg",
     "thumb" : "movies/the_wolf_of_wall_street.jpg",
     "description" : "Jordan Belfort is a Long Island penny stockbroker who served 22 months in prison for defrauding investors in a massive 1990s securities scam that involved widespread corruption on Wall Street and in the corporate banking world, including shoe designer Steve Madden."},
     {"title" : "Bridesmaids",
-    "url" : "https://www.youtube.com/watch?v=FNppLrmdyug",
+    "url" : "https://www.youtube.com/embed/FNppLrmdyug",
     "year" : "2011",
     "picture" : "movies/bridesmaids.jpg",
     "thumb" : "movies/bridesmaids.jpg",
     "description" : "Annie (Kristen Wiig), is a maid of honor whose life unravels as she leads her best friend, Lillian (Maya Rudolph), and a group of colorful bridesmaids (Rose Byrne, Melissa McCarthy, Wendi McLendon-Covey and Ellie Kemper) on a wild ride down the road to matrimony."},
     {"title" : "Mean Girls",
-    "url" : "https://www.youtube.com/watch?v=KAOmTMCtGkI",
+    "url" : "https://www.youtube.com/embed/KAOmTMCtGkI",
     "year" : "2004",
     "picture" : "movies/meangirls.jpg",
     "thumb" : "movies/meangirls.jpg",
     "description" : "Cady is unprepared for her first day of public high school. With the help of Janis (Lizzy Caplan) and Damien (Daniel Franzese), Cady learns about the various cliques. She is warned to avoid the school's most exclusive clique, the Plastics, the reigning trio of girls led by the queen bee Regina George (Rachel McAdams)."},
     {"title" : "Superbad",
-    "url" : "https://www.youtube.com/watch?v=4eaZ_48ZYog",
+    "url" : "https://www.youtube.com/embed/4eaZ_48ZYog",
     "year" : "2007",
     "picture" : "movies/superbad.jpg",
     "thumb" : "movies/superbad.jpg",
@@ -43,13 +43,13 @@ def populate():
 
     horror_movies =[
     {"title" : "Get Out",
-    "url" : "https://www.youtube.com/watch?v=DzfpyUB60YY",
+    "url" : "https://www.youtube.com/embed/DzfpyUB60YY",
     "year" : "2017",
     "picture" : "movies/get_out.jpg",
     "thumb" : "movies/get_out.jpg",
     "description" : "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point."},
     {"title" : "IT",
-    "url" : "https://www.youtube.com/watch?v=FnCdOQsX5kc",
+    "url" : "https://www.youtube.com/embed/FnCdOQsX5kc",
     "year" : "2017",
     "picture" : "movies/it_(2017).jpg",
     "thumb" : "movies/it_(2017).jpg",
@@ -58,13 +58,13 @@ def populate():
     ]
     action_movies =[
     {"title" : "Wonder Woman",
-    "url" : "https://www.youtube.com/watch?v=1Q8fG0TtVAY",
+    "url" : "https://www.youtube.com/embed/1Q8fG0TtVAY",
     "year" : "2017",
     "picture" : "movies/wonder_woman.jpg",
     "thumb" : "movies/wonder_woman.jpg",
     "description" : "Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when a pilot crashes on their shores and tells of a massive conflict raging in the outside world, Diana leaves her home, convinced she can stop the threat. Fighting alongside man in a war to end all wars, Diana will discover her full powers and her true destiny."},
     {"title" : "Mad Max: Fury Road",
-    "url" : "https://www.youtube.com/watch?v=hEJnMQG9ev8",
+    "url" : "https://www.youtube.com/embed/hEJnMQG9ev8",
     "year" : "2015",
     "picture" : "movies/mad_max_fury_road.jpg",
     "thumb" : "movies/mad_max_fury_road.jpg",
@@ -73,20 +73,20 @@ def populate():
     ]
     romance_movies =[
     {"title" : "The Notebook",
-    "url" : "https://www.youtube.com/watch?v=FC6biTjEyZw",
+    "url" : "https://www.youtube.com/embed/FC6biTjEyZw",
     "year" : "2004",
     "picture" : "movies/the_notebook.jpg",
     "thumb" : "movies/the_notebook.jpg",
     "description" : "A poor yet passionate young man falls in love with a rich young woman, giving her a sense of freedom, but they are soon separated because of their social differences."},
     {"title" : "A Star is Born (2018)",
-    "url" : "https://www.youtube.com/watch?v=nSbzyEJ8X9E",
+    "url" : "https://www.youtube.com/embed/nSbzyEJ8X9E",
     "year" : "2018",
     "picture" : "movies/a_star_is_born_(2018).jpg",
 
     "thumb" : "movies/a_star_is_born_(2018).jpg",
     "description" : "Seasoned musician Jackson Maine (Bradley Cooper) discovers-and falls in love with-struggling artist Ally (Gaga). She has just about given up on her dream to make it big as a singer - until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons."},
     {"title" : "Love Actually",
-    "url" : "https://www.youtube.com/watch?v=fOS-HMiVejo",
+    "url" : "https://www.youtube.com/embed/fOS-HMiVejo",
     "year" : "2003",                  
     "picture" : "movies/love_actually.jpg",
 
@@ -96,20 +96,20 @@ def populate():
     ]
     family_movies =[
     {"title" : "Mary Poppins",
-    "url" : "https://www.youtube.com/watch?v=nOfH7uEojKk",
+    "url" : "https://www.youtube.com/embed/nOfH7uEojKk",
     "year" : "1964",
     "picture" : "movies/mary_poppins_(1964).jpg",
 
     "thumb" : "movies/mary_poppins_(1964).jpg",
     "description" : "When Jane and Michael, the children of the wealthy and uptight Banks family, are faced with the prospect of a new nanny, they are pleasantly surprised by the arrival of the magical Mary Poppins. Embarking on a series of fantastical adventures with Mary and her Cockney performer friend, Bert, the siblings try to pass on some of their nanny's sunny attitude to their preoccupied parents."},
     {"title" : "Mary Poppins Returns",
-    "url" : "https://www.youtube.com/watch?v=gZgUW88D15w",
+    "url" : "https://www.youtube.com/embed/gZgUW88D15w",
     "year" : "2018",
     "picture" : "movies/mary_poppins_returns.jpg",
     "thumb" : "movies/mary_poppins_returns.jpg",
     "description" : "Decades after her original visit, the magical nanny returns to help the Banks siblings and Michael's children through a difficult time in their lives."},
     {"title" : "Mrs Doubtfire",
-    "url" : "https://www.youtube.com/watch?v=i8bONcsjaVo",
+    "url" : "https://www.youtube.com/embed/i8bONcsjaVo",
     "year" : "1993",
     "picture" : "movies/mrs_doubtfire.jpg",
 
@@ -120,21 +120,21 @@ def populate():
     ]
     western_movies =[
     {"title" : "Django Unchained",
-    "url" : "https://www.youtube.com/watch?v=_iH0UBYDI4g",
+    "url" : "https://www.youtube.com/embed/_iH0UBYDI4g",
     "year" : "2012",
     "picture" : "movies/django_unchained.jpg",
 
     "thumb" : "movies/django_unchained.jpg",
     "description" : "Two years before the Civil War, Django (Jamie Foxx), a slave, finds himself accompanying an unorthodox German bounty hunter named Dr. King Schultz (Christoph Waltz) on a mission to capture the vicious Brittle brothers. Their mission successful, Schultz frees Django, and together they hunt the South's most-wanted criminals. Their travels take them to the infamous plantation of shady Calvin Candie (Leonardo DiCaprio), where Django's long-lost wife (Kerry Washington) is still a slave."},
     {"title" : "The Magnificent Seven (2016)",
-    "url" : "https://www.youtube.com/watch?v=q-RBA0xoaWU",
+    "url" : "https://www.youtube.com/embed/q-RBA0xoaWU",
     "year" : "2016",
     "picture" : "movies/the_magnificent_seven_(2016).jpg",
 
     "thumb" : "movies/the_magnificent_seven_(2016).jpg",
     "description" : "Looking to mine for gold, greedy industrialist Bartholomew Bogue seizes control of the Old West town of Rose Creek. With their lives in jeopardy, Emma Cullen and other desperate residents turn to bounty hunter Sam Chisolm (Denzel Washington) for help. Chisolm recruits an eclectic group of gunslingers to take on Bogue and his ruthless henchmen. With a deadly showdown on the horizon, the seven mercenaries soon find themselves fighting for more than just money once the bullets start to fly."},
     {"title" : "The Magnificent Seven (1960)",
-    "url" : "https://www.youtube.com/watch?v=bG-ZxrG7htU",
+    "url" : "https://www.youtube.com/embed/bG-ZxrG7htU",
     "year" : "1960",
     "picture" : "movies/the_magnificent_seven_(1960).jpg",
 
@@ -145,14 +145,14 @@ def populate():
 
     scifi_movies =[
     {"title" : "Interstellar",
-    "url" : "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+    "url" : "https://www.youtube.com/embed/zSWdZVtXT7E",
     "year" : "2014",
     "picture" : "movies/interstellar.jpg",
 
     "thumb" : "movies/interstellar.jpg",
     "description" : "Earth's future has been riddled by disasters, famines, and droughts. There is only one way to ensure mankind's survival: Interstellar travel. A newly discovered wormhole in the far reaches of our solar system allows a team of astronauts to go where no man has gone before, a planet that may have the right environment to sustain human life."},
     {"title" : "Star Wars: The Force Awakens",
-    "url" : "https://www.youtube.com/watch?v=sGbxmsDFVnE",
+    "url" : "https://www.youtube.com/embed/sGbxmsDFVnE",
     "year" : "2015",
     "picture" : "movies/star_wars_the_force_awakens.jpg",
 
@@ -162,21 +162,21 @@ def populate():
     ]
     animation_movies =[
     {"title" : "Shrek 2",
-    "url" : "https://www.youtube.com/watch?v=V6X5ti4YlG8",
+    "url" : "https://www.youtube.com/embed/V6X5ti4YlG8",
     "year" : "2004",
     "picture" : "movies/shrek_2.jpg",
 
     "thumb" : "movies/shrek_2.jpg",
     "description" : "Shrek has rescued Princess Fiona, got married, and now is time to meet the parents. Shrek, Fiona, and Donkey set off to Far, Far Away to meet Fiona's mother and father. But not everyone is happy. Shrek and the King find it hard to get along, and there's tension in the marriage."},
     {"title" : "Incredibles 2",
-    "url" : "https://www.youtube.com/watch?v=i5qOzqD9Rms",
+    "url" : "https://www.youtube.com/embed/i5qOzqD9Rms",
     "year" : "2018",
     "picture" : "movies/incredibles_2.jpg",
 
     "thumb" : "movies/incredibles_2.jpg",
     "description" : "The Incredibles hero family takes on a new mission, which involves a change in family roles: Bob Parr (Mr Incredible) must manage the house while his wife Helen (Elastigirl) goes out to save the world."},
     {"title" : "Frozen",
-    "url" : "https://www.youtube.com/watch?v=TbQm5doF_Uc",
+    "url" : "https://www.youtube.com/embed/TbQm5doF_Uc",
     "year" : "2013",
     "picture" : "movies/frozen.jpg",
 
