@@ -83,6 +83,7 @@
   $('.rango').click(function(){
   	var that = $(this);
 
+  	alert($('input[name=rating]:checked').val());
 
   	$.ajax({
   		type: "POST",
@@ -91,14 +92,18 @@
   		data: {
   			content:$('#content').val(),
 					//rating:$('input[name=rating]').val(),
-					user_rating:$('input[name=rating]').val(),
+					user_rating:$('input[name=rating]:checked').val(),
 					
 					movie:$('input[name=movie]').val(),
 					username:$('input[name=username]').val(),
 					csrfmiddlewaretoken: '{{ csrf_token }}',
 				}, //close data
-			}) //close ajax
+			
+		success: function() {   
+        	 $("#list_comments").load(" #list_comments"); 
+    	},
 
+	}); //close ajax
 
 
 
