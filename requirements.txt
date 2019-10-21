@@ -34,7 +34,7 @@ snowballstemmer==1.2.1
 social-auth-app-django==3.1.0
 social-auth-core==3.1.0
 Unidecode==1.0.22
-urllib3==1.24.1
+urllib3==1.24.2
 virtualenv==15.1.0
 virtualenvwrapper-win==1.2.5
 wincertstore==0.2
